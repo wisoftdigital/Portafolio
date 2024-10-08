@@ -43,7 +43,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Capa oscura para mejorar el contraste */
+            background-color: rgba(0, 0, 0, 0.788); /* Capa oscura para mejorar el contraste */
             z-index: -1;
         }
         
@@ -99,7 +99,9 @@
         .btn-primary {
             background-color: #007bff; /* Botón primario azul */
             border-color: #007bff;
-        }
+            color: #fff; /* Color blanco */
+        }        
+        
         .menu-lateral {
             width: 100%;
         }
@@ -159,6 +161,28 @@
             transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
         }
         
+        .modal-content {
+            border-radius: 10px; /* Bordes redondeados */
+        }
+        
+        .modal-header {
+            background-color: #007bff; /* Color de fondo más claro */
+            border-bottom: none; /* Sin borde inferior */
+        }
+        
+        .modal-title {
+            font-weight: bold; /* Negrita */
+        }
+        
+        .modal-body p {
+            font-size: 16px; /* Tamaño de fuente más grande */
+            color: #555; /* Color de texto gris oscuro */
+        }
+        
+        .btn {
+            padding: 10px 20px; /* Padding para los botones */
+            font-weight: 600; /* Texto más fuerte */
+        }
         
         @media(min-width: 992px) {
             .menu-lateral {
@@ -198,9 +222,9 @@
                         
                         <div class="bio mb-3">Hola, soy Yomar Alejandro Echavarria. Desarrollador Fullstack con especialización en soluciones web escalables con ares de enfoque en negocios y finanzas, Una educacion base en Administrador Tecnológico.</div>
                         <ul class="social-list list-inline py-3 mx-auto">
-                            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin fa-fw"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="https://wa.me/+57 3053840193"><i class="fab fa-whatsapp fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/yomar-alejandro-echavarria/"><i class="fab fa-linkedin fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="https://github.com/yomar009"><i class="fab fa-github fa-fw"></i></a></li>
                         </ul>
                         <hr> 
                     </div>
@@ -219,9 +243,11 @@
                         </li>
                     </ul>
                     
-                    <div class="my-2 my-md-3">
-                        <a class="btn btn-primary" href="https://themes.3rdwavemedia.com/" target="_blank">Contáctame</a>
+                    <!-- Botón para abrir el Modal -->
+                    <div class="text-center mb-5 mt-2">
+                        <a class="btn btn-primary btn-lg scrollto" style="color: #fff;" data-bs-toggle="modal" data-bs-target="#contactModal">Contáctame</a>
                     </div>
+
                 </div>
             </nav>
         </header>
@@ -240,7 +266,7 @@
                                 <span class="desc d-block">Desarrollador Backend y Frontend especializado en soluciones web escalables</span>
                             </h1>
                             <div class="text-center mb-5">
-                                <a href="#section-contact" class="btn btn-primary btn-lg scrollto">Contáctame</a>
+                                <a class="btn btn-primary btn-lg scrollto" data-bs-toggle="modal" data-bs-target="#contactModal">Contáctame</a>
                             </div>
                             
                             <div class="hero-summary">
@@ -476,9 +502,44 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Botón para abrir el Modal -->
+                        <div class="text-center mb-5 mt-2">
+                            <a class="btn btn-primary btn-lg scrollto" style="color: #fff;" data-bs-toggle="modal" data-bs-target="#contactModal">Contáctame</a>
+                        </div>
                     </div>
                 </section>
                 
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Contáctame</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Elige una plataforma para contactarme:</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <!-- Botón de WhatsApp -->
+                        <a href="https://wa.me/+57 3053840193" target="_blank" class="btn btn-success rounded-pill">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <!-- Botón de LinkedIn -->
+                        <a href="https://www.linkedin.com/in/yomar-alejandro-echavarria/" target="_blank" class="btn btn-info rounded-pill">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <!-- Botón de GitHub -->
+                        <a href="https://github.com/yomar009" target="_blank" class="btn btn-dark rounded-pill">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
