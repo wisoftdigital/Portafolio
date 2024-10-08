@@ -17,25 +17,54 @@
         body {
             background-color: #1c1e21; /* Fondo oscuro general */
             color: #f8f9fa; /* Texto claro */
+            margin: 0; /* Elimina márgenes del body */
+            height: 100vh;
+            display: flex;
+            flex-direction: column; /* Asegura que los elementos en el body estén uno sobre otro */
         }
+        
+        .d-flex {
+            display: flex;
+            flex-grow: 1; /* El contenedor crece para llenar el espacio disponible */
+        }
+        
+        .menu-lateral {
+            width: 250px; /* Ancho del menú lateral */
+            height: 100vh; /* Altura del menú lateral */
+            position: fixed; /* Fijo en la pantalla */
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Asegúrate que esté por encima del contenido */
+        }
+        
+        .tab-content {
+            margin-left: 250px; /* Espacio a la izquierda para el menú lateral */
+            flex-grow: 1; /* Hacer que este div ocupe el espacio restante */
+            padding: 30px; /* Padding interno para el contenido */
+            display: flex;
+            flex-direction: column;
+            align-items: stretch; /* Asegura que el contenido se extienda horizontalmente */
+        }
+        
         .hero-section {
-            width: 100%; /* Ancho total del contenedor */
-            height: 840px; /* Altura predeterminada */
             background-image: url('hero-bg.jpg'); /* URL de la imagen de fondo */
             background-size: cover; /* Ajusta la imagen para cubrir toda la sección */
             background-position: center; /* Centra la imagen */
             background-attachment: fixed; /* Fija la imagen al fondo */
             padding: 0; /* Elimina el padding si deseas que la imagen ocupe todo el espacio */
-            position: relative;
-            z-index: 1;
+            height: 850px; /* Altura predeterminada */
+
+            position: relative; /* Asegura que el contenido esté posicionado correctamente */
+            z-index: 1; /* Asegura que esté por encima del menú lateral */
+            border-radius: 20px;
+            flex-grow: 1; /* Para que la sección crezca en altura si es necesario */
         }
         
-        /* Opcional: si necesitas que el contenido de la sección se centre verticalmente */
         .hero-section .container {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100%; /* Permite centrar el contenido dentro de la sección */
+            height: 100%; /* Centra verticalmente el contenido dentro de la sección */
         }
         .hero-mask {
             position: absolute;
@@ -45,6 +74,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.788); /* Capa oscura para mejorar el contraste */
             z-index: -1;
+            border-radius: 20px;
         }
         
         
@@ -101,11 +131,6 @@
             border-color: #007bff;
             color: #fff; /* Color blanco */
         }        
-        
-        .menu-lateral {
-            width: 100%;
-        }
-
 
         .section-title h3 {
             font-size: 1.8rem;
@@ -183,26 +208,32 @@
             padding: 10px 20px; /* Padding para los botones */
             font-weight: 600; /* Texto más fuerte */
         }
-        
-        @media(min-width: 992px) {
+
+        /* Media queries para dispositivos más pequeños */
+        @media(max-width: 991px) {
+            .hero-section {
+                margin-left: 0; /* Sin margen en dispositivos pequeños */
+                height: auto; /* Altura automática */
+                margin-top: 10px; /* Margen superior */
+            }
             .menu-lateral {
-                width: 250px;
-                height: 100vh;
-                position: fixed;
-                top: 0;
-                left: 0;
+                width: 100%; /* Menú lateral ocupa el ancho completo */
+                height: auto; /* Ajusta la altura */
+                position: relative; /* Para que no tape el contenido */
+            }
+                /* Centrar el botón navbar-toggler en la mitad de la pantalla */
+            .navbar-toggler {
+                margin: 0 auto; /* Centramos el botón horizontalmente */
+                display: block; /* Asegura que el botón ocupe toda la fila disponible */
+                position: relative; /* Para asegurarnos que lo podamos posicionar correctamente */
+                z-index: 1100; /* Asegura que esté por encima de todo */
+            }
+            .tab-content {
+                margin-left: 0; /* Sin margen en dispositivos pequeños */
             }
         }
-        .content {
-            flex-grow: 1;
-            padding-left: 0;
-        }
-        @media(min-width: 992px) {
-            .content {
-                margin-left: 250px;
-                padding: 40px;
-            }
-        }
+
+
         /* Estilos personalizados omitidos por brevedad */
     </style>
 </head>
@@ -271,20 +302,21 @@
                             
                             <div class="hero-summary">
                                 <div class="row">
-                                    <div class="item col-4">
+                                    <div class="item col-12 col-md-4">
                                         <div class="summary-desc mb-1"><i class="fas fa-laptop-code me-2"></i>Diseño y Desarrollo</div>
                                         <h4 class="summary-heading">¡¡! <span class="desc">Web escalable, dashboards, automatización.</span></h4>
                                     </div>
-                                    <div class="item col-4">
+                                    <div class="item col-12 col-md-4">
                                         <div class="summary-desc mb-1"><i class="fas fa-chart-line me-2"></i>Consultoría en TI</div>
                                         <h4 class="summary-heading">¡¡! <span class="desc">Proyectos, análisis financiero, servidores.</span></h4>
                                     </div>
-                                    <div class="item col-4">
+                                    <div class="item col-12 col-md-4">
                                         <div class="summary-desc mb-1"><i class="fas fa-tasks me-2"></i>Computación en la Nube</div>
                                         <h4 class="summary-heading">¡¡! <span class="desc">Datos masivos, análisis, CRM.</span></h4>
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </section>
@@ -298,6 +330,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="section-title text-center mb-5 mt-5"> <!-- Añadido mt-4 para espacio superior -->
+                                    <h3 class="wow zoomIn" data-wow-delay=".2s">Habilidades</h3>
                                     <h2 class="wow fadeInUp" data-wow-delay=".4s">Servicios y Habilidades</h2>
                                     <p class="wow fadeInUp" data-wow-delay=".6s">
                                         Ofrezco un conjunto integral de habilidades en automatización de negocios, domótica, finanzas y análisis de datos, diseñadas para optimizar procesos y mejorar la eficiencia operativa.
@@ -421,7 +454,7 @@
                     <div class="container">
                         <div class="row text-center">
                             <div class="col-12">
-                                <div class="section-title mb-4">
+                                <div class="section-title mb-4 mt-5">
                                     <h3 class="wow zoomIn" data-wow-delay=".2s">Sobre mí</h3>
                                     <h2 class="wow fadeInUp" data-wow-delay=".4s">Mis areas de conocimiento</h2>
                                     <p class="wow fadeInUp" data-wow-delay=".6s">
@@ -508,7 +541,6 @@
                         </div>
                     </div>
                 </section>
-                
             </div>
         </div>
     </div>
