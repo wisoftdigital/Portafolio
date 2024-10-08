@@ -19,13 +19,23 @@
             color: #f8f9fa; /* Texto claro */
         }
         .hero-section {
+            width: 100%; /* Ancho total del contenedor */
+            height: 840px; /* Altura predeterminada */
             background-image: url('hero-bg.jpg'); /* URL de la imagen de fondo */
             background-size: cover; /* Ajusta la imagen para cubrir toda la sección */
             background-position: center; /* Centra la imagen */
             background-attachment: fixed; /* Fija la imagen al fondo */
-            padding: 100px 0;
+            padding: 0; /* Elimina el padding si deseas que la imagen ocupe todo el espacio */
             position: relative;
             z-index: 1;
+        }
+        
+        /* Opcional: si necesitas que el contenido de la sección se centre verticalmente */
+        .hero-section .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%; /* Permite centrar el contenido dentro de la sección */
         }
         .hero-mask {
             position: absolute;
@@ -93,6 +103,63 @@
         .menu-lateral {
             width: 100%;
         }
+
+
+        .section-title h3 {
+            font-size: 1.8rem;
+            color: #007bff; /* Azul */
+            margin-bottom: 10px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #f8f9fa; /* Blanco */
+            margin-bottom: 15px;
+        }
+        
+        .accordion-button {
+            background-color: #343a40; /* Fondo oscuro */
+            color: #f8f9fa; /* Texto claro */
+            border: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .accordion-button:hover {
+            background-color: #007bff; /* Azul al pasar el cursor */
+            color: #fff; /* Texto blanco al pasar el cursor */
+        }
+        
+        .accordion-body {
+            background-color: #212529; /* Fondo oscuro del contenido */
+            color: #f8f9fa; /* Texto claro */
+        }
+        
+        .accordion-item + .accordion-item {
+            border-top: 1px solid #007bff; /* Línea azul entre acordeones */
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none; /* Quitar el borde de enfoque */
+        }
+        
+        .accordion-button:not(.collapsed) {
+            color: #007bff; /* Color azul para el botón activo */
+            background-color: #fff; /* Fondo ligeramente más claro */
+        }
+
+
+        .single-service {
+            padding: 15px; /* Añade un poco de padding alrededor de cada servicio */
+            text-align: center; /* Asegura que el texto esté centrado */
+            transition: transform 0.3s; /* Efecto de transición al pasar el mouse */
+        }
+        
+        .single-service:hover {
+            transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
+        }
+        
+        
         @media(min-width: 992px) {
             .menu-lateral {
                 width: 250px;
@@ -112,6 +179,7 @@
                 padding: 40px;
             }
         }
+        /* Estilos personalizados omitidos por brevedad */
     </style>
 </head>
 <body>
@@ -123,13 +191,12 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            
 
                 <div id="navigation" class="collapse navbar-collapse flex-column">
                     <div class="profile-section pt-3 pt-lg-0">
                         <img class="profile-image mb-3 rounded-circle mx-auto" src="perfil.jpg" alt="image" width="150">			
                         
-                        <div class="bio mb-3">Hola, soy Yomar Alejandro. Desarrollador Fullstack con especialización en soluciones web escalables, enfocados en finanzas.<br><a href="about.html">Conoce más sobre mí</a></div>
+                        <div class="bio mb-3">Hola, soy Yomar Alejandro Echavarria. Desarrollador Fullstack con especialización en soluciones web escalables con ares de enfoque en negocios y finanzas, Una educacion base en Administrador Tecnológico.</div>
                         <ul class="social-list list-inline py-3 mx-auto">
                             <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
                             <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin fa-fw"></i></a></li>
@@ -138,16 +205,18 @@
                         <hr> 
                     </div>
                     
-                    <ul class="navbar-nav flex-column text-start">
-                        <!-- Los enlaces ahora dispararán las pestañas (tabs) -->
+                    <!-- Uso de `nav` para las pestañas -->
+                    <ul class="nav nav-pills flex-column text-start">
+                        <!-- Vinculación de enlaces con las pestañas a través del atributo `data-bs-target` -->
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#inicio"><i class="fas fa-house fa-fw me-2"></i>Inicio</a>
+                            <a class="nav-link active" data-bs-toggle="pill" href="#inicio"><i class="fas fa-house fa-fw me-2"></i>Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#dashboard"><i class="fas fa-bookmark fa-fw me-2"></i>Dashboard</a>
+                            <a class="nav-link" data-bs-toggle="pill" href="#dashboard"><i class="fas fa-bookmark fa-fw me-2"></i>Habilidades</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#sobre-mi"><i class="fas fa-user fa-fw me-2"></i>Sobre mí</a></li>
+                            <a class="nav-link" data-bs-toggle="pill" href="#sobre-mi"><i class="fas fa-user fa-fw me-2"></i>Sobre mí</a>
+                        </li>
                     </ul>
                     
                     <div class="my-2 my-md-3">
@@ -156,254 +225,265 @@
                 </div>
             </nav>
         </header>
+
         <!-- Contenido principal -->
         <div class="tab-content content">
             <!-- Sección de Inicio -->
             <div class="tab-pane fade show active" id="inicio">
-            <section class="hero-section">
-                <div class="hero-mask"></div>
-                <div class="container text-center py-5">
-                    <div class="single-col-max mx-auto">
-                        <div class="hero-heading-upper pt-3 mb-3">Impulsa tu idea tecnológica <br class="d-md-none">con experiencia</div>
-                        <h1 class="hero-heading mb-5">
-                            <span class="brand mb-4 d-block"><span class="text-highlight pr-2">{</span><span class="name">Yomar Alejandro Echavarría</span><span class="text-highlight pl-2">}</span></span>
-                            <span class="desc d-block">Desarrollador Backend y Frontend especializado en soluciones web escalables</span>
-                        </h1>
-                        <div class="text-center mb-5">
-                            <a href="#section-contact" class="btn btn-primary btn-lg scrollto">Contáctame</a>
-                        </div>
-                        
-                        <div class="hero-summary">
-                            <div class="row">
-                                <div class="item col-4">
-                                    <div class="summary-desc mb-1"><i class="fas fa-laptop-code me-2"></i>Expertise</div>
-                                    <h4 class="summary-heading">10+ <span class="desc">Años de experiencia</span></h4>
-                                </div>
-                                <div class="item col-4">
-                                    <div class="summary-desc mb-1"><i class="fas fa-chart-line me-2"></i>Análisis Financiero</div>
-                                    <h4 class="summary-heading">Experto<span class="desc"> en análisis estadístico y financiero</span></h4>
-                                </div>
-                                <div class="item col-4">
-                                    <div class="summary-desc mb-1"><i class="fas fa-tasks me-2"></i>Gestión de proyectos</div>
-                                    <h4 class="summary-heading">Líder<span class="desc"> en proyectos de automatización</span></h4>
+                <section class="hero-section">
+                    <div class="hero-mask"></div>
+                    <div class="container text-center py-5">
+                        <div class="single-col-max mx-auto">
+                            <div class="hero-heading-upper pt-3 mb-3">Impulsa tu idea tecnológica <br class="d-md-none">con experiencia</div>
+                            <h1 class="hero-heading mb-5">
+                                <span class="brand mb-4 d-block"><span class="text-highlight pr-2">{ </span><span class="name">Yomar Alejandro Echavarría</span><span class="text-highlight pl-2"> }</span></span>
+                                <span class="desc d-block">Desarrollador Backend y Frontend especializado en soluciones web escalables</span>
+                            </h1>
+                            <div class="text-center mb-5">
+                                <a href="#section-contact" class="btn btn-primary btn-lg scrollto">Contáctame</a>
+                            </div>
+                            
+                            <div class="hero-summary">
+                                <div class="row">
+                                    <div class="item col-4">
+                                        <div class="summary-desc mb-1"><i class="fas fa-laptop-code me-2"></i>Diseño y Desarrollo</div>
+                                        <h4 class="summary-heading">¡¡! <span class="desc">Web escalable, dashboards, automatización.</span></h4>
+                                    </div>
+                                    <div class="item col-4">
+                                        <div class="summary-desc mb-1"><i class="fas fa-chart-line me-2"></i>Consultoría en TI</div>
+                                        <h4 class="summary-heading">¡¡! <span class="desc">Proyectos, análisis financiero, servidores.</span></h4>
+                                    </div>
+                                    <div class="item col-4">
+                                        <div class="summary-desc mb-1"><i class="fas fa-tasks me-2"></i>Computación en la Nube</div>
+                                        <h4 class="summary-heading">¡¡! <span class="desc">Datos masivos, análisis, CRM.</span></h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
             </div>
-            <!-- Sección de Dashboard -->
+            
+           <!-- Sección de Dashboard -->
             <div class="tab-pane fade" id="dashboard">
-                <h2>Mi Dashboard</h2>
-            <section class="faq section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="section-title">
-                                <h3 class="wow zoomIn" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: zoomIn;">Faq</h3>
-                                <h2 class="wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">frequently asked questions</h2>
-                                <p class="wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">There are many variations of passages of Lorem
-                                    Ipsum available, but the majority have
-                                    suffered alteration in some form.</p>
+                <section class="hero-section">
+                    <div class="hero-mask"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title text-center mb-5 mt-5"> <!-- Añadido mt-4 para espacio superior -->
+                                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Servicios y Habilidades</h2>
+                                    <p class="wow fadeInUp" data-wow-delay=".6s">
+                                        Ofrezco un conjunto integral de habilidades en automatización de negocios, domótica, finanzas y análisis de datos, diseñadas para optimizar procesos y mejorar la eficiencia operativa.
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12 col-12">
-                            <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading1">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                            <span class="title">Can I cancel my subscription at anytime?</span><i class="lni lni-plus"></i>
-                                        </button>
-                                    </h2>
-                                    <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur sit
-                                                amet ante nec vulputate. Nulla aliquam, justo auctor consequat tincidunt, arcu
-                                                erat mattis lorem.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur sit
-                                                amet ante nec vulputate.</p>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading1">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                                <span class="title">Automatización en Negocios</span>
+                                                <i class="lni lni-plus"></i>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <p>Implemento soluciones automatizadas que mejoran la eficiencia y reducen costos, permitiendo a las empresas enfocarse en su crecimiento y desarrollo.</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading2">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                            <span class="title">Can I change my plan later on?</span><i class="lni lni-plus"></i>
-                                        </button>
-                                    </h2>
-                                    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                                richardson ad squid. 3 wolf moon officia aute. non cupidatat skateboard dolor
-                                                brunch. Foosd truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor.
-                                            </p>
-                                            <p>
-                                                sunt alqua put a bird on it squid single-origin coffee nulla assumenda
-                                                shoreditch et. Nihil anim ke ffiyeh helvetica, craft beer labore wes anderson
-                                                cred nesciunt sapiente ea proident.</p>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading2">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                                <span class="title">Domótica</span>
+                                                <i class="lni lni-plus"></i>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <p>Ofrezco servicios de domótica para hacer hogares y oficinas más inteligentes, mejorando la comodidad y la seguridad de los usuarios.</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading3">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                            <span class="title">Will you renew my subscription automatically?</span><i class="lni lni-plus"></i>
-                                        </button>
-                                    </h2>
-                                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas expedita,
-                                                repellendus est nemo cum quibusdam optio, voluptate hic a tempora facere, nihil
-                                                non itaque alias similique quas quam odit consequatur.</p>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading3">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                                <span class="title">Finanzas y Análisis de Datos</span>
+                                                <i class="lni lni-plus"></i>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <p>Realizo análisis de datos y finanzas empresariales, utilizando herramientas modernas para transformar datos en información valiosa que impulsa decisiones estratégicas.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="accordion" id="accordionExample2">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading11">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                                                <span class="title">Dashboards de Datos</span>
+                                                <i class="lni lni-plus"></i>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse11" class="accordion-collapse collapse" aria-labelledby="heading11" data-bs-parent="#accordionExample2">
+                                            <div class="accordion-body">
+                                                <p>Desarrollo dashboards interactivos que permiten visualizar datos de manera intuitiva, facilitando el análisis y la toma de decisiones informadas.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading22">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse22" aria-expanded="false" aria-controls="collapse22">
+                                                <span class="title">Automatización de Procesos</span>
+                                                <i class="lni lni-plus"></i>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse22" class="accordion-collapse collapse" aria-labelledby="heading22" data-bs-parent="#accordionExample2">
+                                            <div class="accordion-body">
+                                                <p>Diseño y desarrollo de sistemas automatizados que optimizan procesos operativos y administrativos, aumentando la productividad y reduciendo errores.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading33">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse33" aria-expanded="false" aria-controls="collapse33">
+                                                <span class="title">Consultoría en Finanzas</span>
+                                                <i class="lni lni-plus"></i>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse33" class="accordion-collapse collapse" aria-labelledby="heading33" data-bs-parent="#accordionExample2">
+                                            <div class="accordion-body">
+                                                <p>Brindo asesoría financiera a empresas, ayudándolas a desarrollar estrategias que mejoren su rendimiento financiero y reduzcan riesgos.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-lg-6 col-md-12 col-12 xs-margin">
-                            <div class="accordion" id="accordionExample2">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading11">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
-                                            <span class="title">How many sites can I install the widgets of this app
-                                                to?</span><i class="lni lni-plus"></i>
-                                        </button>
-                                    </h2>
-                                    <div id="collapse11" class="accordion-collapse collapse" aria-labelledby="heading11" data-bs-parent="#accordionExample2">
-                                        <div class="accordion-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur sit
-                                                amet ante nec vulputate. Nulla aliquam, justo auctor consequat tincidunt, arcu
-                                                erat mattis lorem.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur sit
-                                                amet ante nec vulputate.</p>
-                                        </div>
+                        <div class="container my-2"> <!-- Cambiado my-5 a my-3 -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="img-container">
+                                        <img src="fintech.png" alt="Imagen 1" class="img-fluid rounded shadow" />
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading22">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse22" aria-expanded="false" aria-controls="collapse22">
-                                            <span class="title">Do you offer any discounts?</span><i class="lni lni-plus"></i>
-                                        </button>
-                                    </h2>
-                                    <div id="collapse22" class="accordion-collapse collapse" aria-labelledby="heading22" data-bs-parent="#accordionExample2">
-                                        <div class="accordion-body">
-                                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                                richardson ad squid. 3 wolf moon officia aute. non cupidatat skateboard dolor
-                                                brunch. Foosd truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor.
-                                            </p>
-                                            <p>
-                                                sunt alqua put a bird on it squid single-origin coffee nulla assumenda
-                                                shoreditch et. Nihil anim ke ffiyeh helvetica, craft beer labore wes anderson
-                                                cred nesciunt sapiente ea proident.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading33">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse33" aria-expanded="false" aria-controls="collapse33">
-                                            <span class="title">Do I get updates for the app?</span><i class="lni lni-plus"></i>
-                                        </button>
-                                    </h2>
-                                    <div id="collapse33" class="accordion-collapse collapse" aria-labelledby="heading33" data-bs-parent="#accordionExample2">
-                                        <div class="accordion-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas expedita,
-                                                repellendus est nemo cum quibusdam optio, voluptate hic a tempora facere, nihil
-                                                non itaque alias similique quas quam odit consequatur.</p>
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="img-container">
+                                        <img src="dashboard.png" alt="Imagen 2" class="img-fluid rounded shadow" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+                
             </div>
+
+
+            
             <!-- Sección de Sobre mí -->
             <div class="tab-pane fade" id="sobre-mi">
-                <h2>Sobre Yomar Alejandro</h2>
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-title">
-                            <h3 class="wow zoomIn" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: zoomIn;">What we offer</h3>
-                            <h2 class="wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Our Services</h2>
-                            <p class="wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">There are many variations of passages of Lorem
-                                Ipsum available, but the majority have suffered alteration in some form.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                        <div class="single-service">
-                            <div class="main-icon">
-                                <i class="lni lni-grid-alt"></i>
+                <section class="hero-section">
+                    <div class="hero-mask"></div>
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-12">
+                                <div class="section-title mb-4">
+                                    <h3 class="wow zoomIn" data-wow-delay=".2s">Sobre mí</h3>
+                                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Mis areas de conocimiento</h2>
+                                    <p class="wow fadeInUp" data-wow-delay=".6s">
+                                        Explora una amplia gama de servicios diseñados para satisfacer posibles necesidades y ayudarte a alcanzar objetivos.
+                                    </p>
+                                </div>
                             </div>
-                            <h4 class="text-title">Brand Identity Design</h4>
-                            <p>Invest in Bitcoin on the regular or save with one of the highest interest rates on the
-                                market.</p>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-                        <div class="single-service">
-                            <div class="main-icon">
-                                <i class="lni lni-keyword-research"></i>
+                        <div class="row">
+                            <!-- Servicio 1 -->
+                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".2s">
+                                <div class="single-service">
+                                    <div class="main-icon">
+                                        <i class="lni lni-grid-alt"></i>
+                                    </div>
+                                    <h4 class="text-title">Diseño y Desarrollo</h4>
+                                    <p>Soluciones personalizadas de diseño y desarrollo web que mejoran la experiencia del usuario y fomentan el compromiso.</p>
+                                </div>
                             </div>
-                            <h4 class="text-title">Digital Marketing</h4>
-                            <p>Invest in Bitcoin on the regular or save with one of the highest interest rates on the
-                                market.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
-                        <div class="single-service">
-                            <div class="main-icon">
-                                <i class="lni lni-vector"></i>
+                            <!-- Servicio 2 -->
+                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".4s">
+                                <div class="single-service">
+                                    <div class="main-icon">
+                                        <i class="lni lni-keyword-research"></i>
+                                    </div>
+                                    <h4 class="text-title">Consultoría en TI</h4>
+                                    <p>Optimiza tus operaciones y mejora tu estrategia tecnológica con nuestra consultoría experta.</p>
+                                </div>
                             </div>
-                            <h4 class="text-title">Design and Development</h4>
-                            <p>Invest in Bitcoin on the regular or save with one of the highest interest rates on the
-                                market.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                        <div class="single-service">
-                            <div class="main-icon">
-                                <i class="lni lni-book"></i>
+                            <!-- Servicio 3 -->
+                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".6s">
+                                <div class="single-service">
+                                    <div class="main-icon">
+                                        <i class="lni lni-vector"></i>
+                                    </div>
+                                    <h4 class="text-title">Computación en la Nube</h4>
+                                    <p>Transforma tu negocio con soluciones seguras y escalables adaptadas a tus necesidades.</p>
+                                </div>
                             </div>
-                            <h4 class="text-title">IT Consulting Service</h4>
-                            <p>Invest in Bitcoin on the regular or save with one of the highest interest rates on the
-                                market.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-                        <div class="single-service">
-                            <div class="main-icon">
-                                <i class="lni lni-cloud-network"></i>
+                            <!-- Servicio 4 -->
+                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".2s">
+                                <div class="single-service">
+                                    <div class="main-icon">
+                                        <i class="lni lni-book"></i>
+                                    </div>
+                                    <h4 class="text-title">Habilidades y Tecnologías</h4>
+                                    <p>
+                                        <strong>Lenguajes y Tecnologías:</strong> Python, Flask, Tkinter, SQL, HTML, CSS, JavaScript, Bootstrap.<br>
+                                        <strong>Dashboards:</strong> Especialización en visualización de datos financieros con Chart.js.<br>
+                                        <strong>Automatización:</strong> Desarrollo de informes automatizados para email y dispositivos móviles.
+                                    </p>
+                                </div>
                             </div>
-                            <h4 class="text-title">Cloud Computing</h4>
-                            <p>Invest in Bitcoin on the regular or save with one of the highest interest rates on the
-                                market.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
-                        <div class="single-service">
-                            <div class="main-icon">
-                                <i class="lni lni-display-alt"></i>
+                            <!-- Servicio 5 -->
+                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".4s">
+                                <div class="single-service">
+                                    <div class="main-icon">
+                                        <i class="lni lni-cloud-network"></i>
+                                    </div>
+                                    <h4 class="text-title">Gestión de Servidores</h4>
+                                    <p>
+                                        <strong>Frameworks y Librerías:</strong> Flask, Chart.js, Numpy, Panda.<br>
+                                        <strong>Análisis Financiero:</strong> Implementación de modelos estadísticos enfocados en el rendimiento empresarial.
+                                    </p>
+                                </div>
                             </div>
-                            <h4 class="text-title">Graphics Design</h4>
-                            <p>Invest in Bitcoin on the regular or save with one of the highest interest rates on the
-                                market.</p>
+                            <!-- Servicio 6 -->
+                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".6s">
+                                <div class="single-service">
+                                    <div class="main-icon">
+                                        <i class="lni lni-display-alt"></i>
+                                    </div>
+                                    <h4 class="text-title">Análisis de Datos</h4>
+                                    <p>
+                                        <strong>Bases de Datos:</strong> SQL, manejo y análisis de datos masivos.<br>
+                                        <strong>Herramientas:</strong> Python, R, Numpy, Panda, SQL, Google Colab.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </section>
+                
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS, Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
