@@ -162,10 +162,54 @@
             color: rgba(255, 255, 255, 0.7) !important;
         }
     </style>
+
+    <style>
+        /* Estilos para el loader-wrapper */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+            z-index: 9999; /* Asegura que esté por encima de todo */
+        }
+
+        /* Oculta el contenido principal por defecto */
+        #main-content {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
-
+    <!-- =========== PANTALLA DE CARGA =========== -->
+    <div id="loader-wrapper" class="d-flex justify-content-center align-items-center">
+        <div class="card shadow-lg text-center">
+            <!-- Header -->
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0 fw-bold">
+                    <i class="bi bi-code-slash me-2"></i>
+                    Mi Portafolio
+                </h5>
+            </div>
+            <!-- Body -->
+            <div class="card-body p-4">
+                <div class="spinner-grow text-primary mb-3" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+                <p class="fs-5 fw-bold text-dark mb-1">Construyendo mi mundo digital...</p>
+                <p id="loading-message" class="text-muted">Iniciando compilación...</p>
+                <div class="progress mt-3" style="height: 8px;">
+                    <div id="loading-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="card-footer text-muted small" style="background-color: var(--resaltador) !important;">
+                <small class="text-black">&copy; 2025 Yomar Echavarría.</small>
+            </div>
+        </div>
+    </div>
     <!-- Sidebar Izquierdo (Offcanvas para pantallas pequeñas) -->
     <div class="offcanvas offcanvas-start left-sidebar-container" tabindex="-1" id="main-sidebar"
         aria-labelledby="main-sidebar-label">
@@ -1118,6 +1162,65 @@
 
     <!-- Script de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        window.addEventListener('load', function () {
+            const loader = document.getElementById('loader-wrapper');
+            const mainContent = document.getElementById('main-content');
+            const progressBar = document.getElementById('loading-progress-bar');
+            const loadingMessage = document.getElementById('loading-message');
+
+            const messages = [
+                "Compilando pixeles...",
+                "Afinando el diseño...",
+                "Cargando proyectos increíbles...",
+                "Dando los últimos toques...",
+                "¡Casi listo!"
+            ];
+
+            let progress = 0;
+            let messageIndex = 0;
+
+            // Cambia el mensaje inicial
+            loadingMessage.innerText = messages[0];
+
+            // Intervalo para actualizar la barra de progreso y los mensajes
+            const interval = setInterval(() => {
+                // Incremento aleatorio para un efecto más natural
+                progress += Math.floor(Math.random() * 5) + 1;
+                if (progress > 100) {
+                    progress = 100;
+                }
+
+                // Actualiza el estilo y el atributo 'aria' de la barra de progreso
+                progressBar.style.width = progress + '%';
+                progressBar.setAttribute('aria-valuenow', progress);
+
+                // Cambia el mensaje en puntos clave del progreso
+                if (progress > 30 && messageIndex === 0) { messageIndex = 1; loadingMessage.innerText = messages[messageIndex]; }
+                if (progress > 60 && messageIndex === 1) { messageIndex = 2; loadingMessage.innerText = messages[messageIndex]; }
+                if (progress > 90 && messageIndex === 2) { messageIndex = 3; loadingMessage.innerText = messages[messageIndex]; }
+                
+                // Cuando la carga se completa
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    loadingMessage.innerText = messages[4];
+
+                    // Espera un momento para que se vea el 100%
+                    setTimeout(() => {
+                        // Inicia el desvanecimiento del loader
+                        loader.style.opacity = '0';
+
+                        // Oculta el loader y muestra el contenido principal después de la transición
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                            mainContent.style.display = 'block';
+                        }, 700); // Coincide con la duración de la transición en CSS
+                    }, 500);
+                }
+            }, 120); // Velocidad de la actualización
+        });
+    </script>
 
     <script>
         // --- Manejo de tema ---
