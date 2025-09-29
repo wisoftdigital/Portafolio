@@ -1210,6 +1210,8 @@
                     setTimeout(() => {
                         // Inicia el desvanecimiento del loader
                         loader.style.opacity = '0';
+                        // Evita que el loader bloquee los clics durante la transición
+                        loader.style.pointerEvents = 'none';
 
                         // Oculta el loader y muestra el contenido principal después de la transición
                         setTimeout(() => {
@@ -1218,7 +1220,7 @@
                         }, 700); // Coincide con la duración de la transición en CSS
                     }, 500);
                 }
-            }, 120); // Velocidad de la actualización
+            }, 100); // Velocidad de la actualización
         });
     </script>
 
@@ -1504,5 +1506,6 @@ const wheelNavHandler = (event) => {
 
 
 </html>
+
 
 
