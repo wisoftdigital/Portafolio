@@ -1,614 +1,1383 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Portafolio de Yomar Alejandro Echavarría Castaño</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="favicon.png">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- FontAwesome CSS para los iconos -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-    <!-- Custom CSS (estilos personalizados) -->
+    <title>Portafolio web YAEC</title>
+    <!-- CDN de Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CDN de Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        body {
-            background-color: #1c1e21; /* Fondo oscuro general */
-            color: #f8f9fa; /* Texto claro */
-            margin: 0; /* Elimina márgenes del body */
-            height: 100vh;
-            display: flex;
-            flex-direction: column; /* Asegura que los elementos en el body estén uno sobre otro */
+        /* Minimal CSS - sólo lo necesario */
+        :root {
+            --app-border: #9aa0a6;
+            /* El color del borde se mantiene */
+            --resaltador: #9ad8b4;
         }
-        
-        .d-flex {
-            display: flex;
-            flex-grow: 1; /* El contenedor crece para llenar el espacio disponible */
-        }
-        
-        .menu-lateral {
-            width: 300px; /* Ancho del menú lateral */
-            height: 100vh; /* Altura del menú lateral */
-            position: fixed; /* Fijo en la pantalla */
-            top: 0;
-            left: 0;
-            z-index: 1000; /* Asegúrate que esté por encima del contenido */
-        }
-        
-        .tab-content {
-            margin-left: 300px; /* Espacio a la izquierda para el menú lateral */
-            flex-grow: 1; /* Hacer que este div ocupe el espacio restante */
-            padding: 30px; /* Padding interno para el contenido */
-            display: flex;
-            flex-direction: column;
-            align-items: stretch; /* Asegura que el contenido se extienda horizontalmente */
-        }
-        
-        .hero-section {
-            background-image: url('hero-bg.jpg'); /* URL de la imagen de fondo */
-            background-size: cover; /* Ajusta la imagen para cubrir toda la sección */
-            background-position: center; /* Centra la imagen */
-            background-attachment: fixed; /* Fija la imagen al fondo */
-            padding: 0; /* Elimina el padding si deseas que la imagen ocupe todo el espacio */
-            height: 870px; /* Altura predeterminada */
 
-            position: relative; /* Asegura que el contenido esté posicionado correctamente */
-            z-index: 1; /* Asegura que esté por encima del menú lateral */
-            border-radius: 20px;
-            flex-grow: 1; /* Para que la sección crezca en altura si es necesario */
+        /* Transiciones */
+        body,
+        .card,
+        .navbar,
+        .left-sidebar-container,
+        #right-sidebar-offcanvas,
+        #right-sidebar,
+        .left-sidebar-container .nav-pills .nav-link {
+            transition: background-color .2s ease, color .2s ease, border-color .2s ease;
         }
-        
-        .hero-section .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%; /* Centra verticalmente el contenido dentro de la sección */
+
+        /* --- Tema Oscuro (Modificado) --- */
+        [data-bs-theme="dark"] {
+            --bs-body-bg: #000000;
+            /* Fondo negro puro */
+            --bs-body-color: #ffffff;
+            /* Letras blancas puras */
+            --bs-offcanvas-bg: #111111;
         }
-        .hero-mask {
+
+        [data-bs-theme="dark"] .card,
+        [data-bs-theme="dark"] .navbar,
+        [data-bs-theme="dark"] #right-sidebar-offcanvas,
+        [data-bs-theme="dark"] #right-sidebar,
+        [data-bs-theme="dark"] .left-sidebar-container {
+            background-color: #111111;
+            /* Negro suave para componentes */
+            color: #ffffff;
+            border-color: var(--app-border);
+        }
+
+        /* --- Tema Claro --- */
+        [data-bs-theme="light"] {
+            --bs-body-bg: #f8f9fa;
+            --bs-body-color: #222;
+            --bs-offcanvas-bg: #fff;
+        }
+
+        [data-bs-theme="light"] .card,
+        [data-bs-theme="light"] .navbar,
+        [data-bs-theme="light"] #right-sidebar-offcanvas,
+        [data-bs-theme="light"] #right-sidebar,
+        [data-bs-theme="light"] .left-sidebar-container {
+            background-color: #fff;
+            color: #222;
+            border-color: var(--app-border);
+        }
+
+        /* Sidebars */
+        #right-sidebar-offcanvas {
+            --bs-offcanvas-width: 80px;
+        }
+
+        #main-sidebar {
+            /* Offcanvas */
+            --bs-offcanvas-width: 280px;
+            border-right: 1px solid var(--app-border);
+        }
+
+        #right-sidebar {
+            width: 80px;
+        }
+
+        /* Estilo para el botón activo del sidebar izquierdo */
+        .left-sidebar-container .nav-pills .nav-link.active,
+        .left-sidebar-container .nav-pills .show>.nav-link {
+            background-color: var(--resaltador);
+            /* Fondo gris */
+            color: black;
+            /* Texto negro */
+        }
+
+        /* Estilo para botones inactivos del sidebar izquierdo */
+        .left-sidebar-container .nav-pills .nav-link:not(.active) {
+            color: #6c757d;
+            /* Color gris para el texto inactivo */
+        }
+
+        /* Estilo para el hover de botones inactivos */
+        .left-sidebar-container .nav-pills .nav-link:not(.active):hover {
+            background-color: var(--resaltador);
+            /* Fondo gris en hover */
+            color: black;
+            /* Texto negro en hover */
+        }
+
+        /* Texto vertical dentro de las tarjetas (badge vertical) */
+        .vertical-text {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.788); /* Capa oscura para mejorar el contraste */
-            z-index: -1;
-            border-radius: 20px;
-            border: 5px solid #565a5f; /* Borde gris de 10px */
-        }
-        
-        
-        .hero-heading-upper {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #007bff; /* Azul para destacar */
-        }
-        .hero-heading {
-            font-size: 3rem;
-            color: #f8f9fa;
-        }
-        .brand .name {
-            font-weight: 700;
-            color: #007bff; /* Azul */
-        }
-        .text-highlight {
-            color: #007bff; /* Azul para destacar */
-        }
-        .hero-summary {
-            margin-top: 40px;
-        }
-        .summary-heading {
-            font-size: 1.5rem;
-            color: #f8f9fa;
-        }
-        .summary-desc {
-            color: #adb5bd; /* Texto gris claro */
-        }
-        .header {
-            background-color: #343a40; /* Fondo oscuro para la cabecera */
-            color: #f8f9fa;
-        }
-        .header a {
-            color: #007bff; /* Azul en los enlaces */
-        }
-        .navbar {
-            background-color: #212529; /* Fondo oscuro para la barra de navegación */
-        }
-        .profile-section {
-            color: #f8f9fa;
-        }
-        .profile-image {
-            border: 2px solid #007bff; /* Borde azul para la imagen de perfil */
-        }
-        .navbar-nav .nav-link {
-            color: #adb5bd; /* Texto gris claro en los enlaces de navegación */
-        }
-        .navbar-nav .nav-link.active {
-            color: #007bff; /* Azul para el enlace activo */
-        }
-        .btn-primary {
-            background-color: #007bff; /* Botón primario azul */
-            border-color: #007bff;
-            color: #fff; /* Color blanco */
-        }        
-
-        .section-title h3 {
-            font-size: 1.8rem;
-            color: #007bff; /* Azul */
-            margin-bottom: 10px;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #f8f9fa; /* Blanco */
-            margin-bottom: 15px;
-        }
-        
-        .accordion-button {
-            background-color: #343a40; /* Fondo oscuro */
-            color: #f8f9fa; /* Texto claro */
-            border: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        
-        .accordion-button:hover {
-            background-color: #007bff; /* Azul al pasar el cursor */
-            color: #fff; /* Texto blanco al pasar el cursor */
-        }
-        
-        .accordion-body {
-            background-color: #212529; /* Fondo oscuro del contenido */
-            color: #f8f9fa; /* Texto claro */
-        }
-        
-        .accordion-item + .accordion-item {
-            border-top: 1px solid #007bff; /* Línea azul entre acordeones */
-        }
-        
-        .accordion-button:focus {
-            box-shadow: none; /* Quitar el borde de enfoque */
-        }
-        
-        .accordion-button:not(.collapsed) {
-            color: #007bff; /* Color azul para el botón activo */
-            background-color: #fff; /* Fondo ligeramente más claro */
+            top: 50%;
+            left: 12px;
+            transform: translate(-50%, -50%) rotate(-90deg);
+            color: inherit;
+            font-size: 0.9rem;
+            letter-spacing: 0.08rem;
         }
 
-
-        .single-service {
-            padding: 15px; /* Añade un poco de padding alrededor de cada servicio */
-            text-align: center; /* Asegura que el texto esté centrado */
-            transition: transform 0.3s; /* Efecto de transición al pasar el mouse */
-        }
-        
-        .single-service:hover {
-            transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
-        }
-        
-        .modal-content {
-            border-radius: 10px; /* Bordes redondeados */
-        }
-        
-        .modal-header {
-            background-color: #007bff; /* Color de fondo más claro */
-            border-bottom: none; /* Sin borde inferior */
-        }
-        
-        .modal-title {
-            font-weight: bold; /* Negrita */
-        }
-        
-        .modal-body p {
-            font-size: 16px; /* Tamaño de fuente más grande */
-            color: #555; /* Color de texto gris oscuro */
-        }
-        
-        .btn {
-            padding: 10px 20px; /* Padding para los botones */
-            font-weight: 600; /* Texto más fuerte */
+        [data-bs-theme="dark"] .vertical-text {
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        /* Media queries para dispositivos más pequeños */
-        @media(max-width: 991px) {
-            .hero-section {
-                margin-left: 0; /* Sin margen en dispositivos pequeños */
-                height: auto; /* Altura automática */
-                margin-top: 10px; /* Margen superior */
-            }
-            .menu-lateral {
-                width: 100%; /* Menú lateral ocupa el ancho completo */
-                height: auto; /* Ajusta la altura */
-                position: relative; /* Para que no tape el contenido */
-            }
-                /* Centrar el botón navbar-toggler en la mitad de la pantalla */
-            .navbar-toggler {
-                margin: 0 auto; /* Centramos el botón horizontalmente */
-                display: block; /* Asegura que el botón ocupe toda la fila disponible */
-                position: relative; /* Para asegurarnos que lo podamos posicionar correctamente */
-                z-index: 1100; /* Asegura que esté por encima de todo */
-            }
-            .tab-content {
-                margin-left: 0; /* Sin margen en dispositivos pequeños */
-            }
+        [data-bs-theme="light"] .vertical-text {
+            color: #6c757d;
+            /* Un color secundario estándar para buena legibilidad */
         }
 
+        /* Uniform border color */
+        .border-light,
+        .border-start,
+        .border-end,
+        .border-top,
+        .border-bottom,
+        .navbar,
+        .card,
+        .left-sidebar-container,
+        #right-sidebar-offcanvas .offcanvas-header,
+        #right-sidebar-offcanvas,
+        #right-sidebar,
+        .bio,
+        .card-header,
+        .card-footer {
+            border-color: var(--app-border) !important;
+        }
 
-        /* Estilos personalizados omitidos por brevedad */
+        /* Ensure common text utilities follow the active theme */
+        [data-bs-theme="light"] .text-light,
+        [data-bs-theme="light"] .text-white-50,
+        [data-bs-theme="light"] .text-secondary,
+        [data-bs-theme="light"] .text-muted,
+        [data-bs-theme="light"] .form-text {
+            color: #222 !important;
+        }
+
+        [data-bs-theme="dark"] .text-dark,
+        [data-bs-theme="dark"] .text-body,
+        [data-bs-theme="dark"] .form-text {
+            color: #ffffff !important;
+        }
+
+        [data-bs-theme="dark"] .text-secondary,
+        [data-bs-theme="dark"] .text-muted,
+        [data-bs-theme="dark"] .text-white-50 {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
     </style>
 </head>
-<body>
-    <div class="d-flex flex-column flex-lg-row">
-        <!-- Menú lateral (se convierte en barra superior en pantallas pequeñas) -->
-        <header class="header menu-lateral bg-dark p-3 text-center overflow-auto">
-            <h1 class="blog-name mb-0">
-                <a href="#" class="text-decoration-none text-white fw-bold" style="font-size: 1.00rem;">¡¡! Mi Portafolio</a>
-            </h1>
-            <nav class="navbar navbar-expand-lg navbar-dark d-flex justify-content-center mt-2">
-                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div id="navigation" class="navbar-collapse flex-column">
-                    <div class="profile-section pt-3 pt-lg-0">
-                        <img class="profile-image mb-3 rounded-circle mx-auto" src="perfil.jpg" alt="image" width="120">			
-                        
-                        <div class="bio mb-3 text-justify" style="font-size: 0.875rem;">
-                            Hola, soy Yomar Alejandro Echavarría, Desarrollador Fullstack especializado en soluciones web escalables y optimización de procesos en negocios y finanzas. Con formación en Administración Tecnológica e Ingeniería de Software, Experimentado en creación de aplicaciones Python que abarcan el ciclo de desarrollo: Modulacion, pruebas unitarias y empaquetado, hasta la implementación según prácticas de PEP8.
-                          </div>
-                          
-                        <ul class="social-list list-inline py-3 mx-auto">
-                            <li class="list-inline-item"><a href="https://wa.me/573053840193"target="_blank"><i class="fab fa-whatsapp fa-fw"></i></a></li>
-                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/yomar-alejandro-echavarria/"><i class="fab fa-linkedin fa-fw"></i></a></li>
-                            <li class="list-inline-item"><a href="https://github.com/yomar009"><i class="fab fa-github fa-fw"></i></a></li>
-                        </ul>
-                        <hr> 
+<body>
+
+    <!-- Sidebar Izquierdo (Offcanvas para pantallas pequeñas) -->
+    <div class="offcanvas offcanvas-start left-sidebar-container" tabindex="-1" id="main-sidebar"
+        aria-labelledby="main-sidebar-label">
+        <div class="offcanvas-header justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="main-sidebar-label" style="margin-right:auto;">Menú</h5>
+            <button type="button" class="btn btn-outline-secondary ms-auto" data-bs-dismiss="offcanvas"
+                aria-label="Close">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column p-3">
+            <img src="IMG_6135.jpeg" alt="Logo" style="width:100%;height:auto;object-fit:cover;" class="mb-3 rounded-2">
+            <div class="bio mb-3 form-text border-top border-bottom py-3" style="font-size: 0.875rem;">
+                <p>Me Especializo en la creación de ecosistemas tecnológicos inteligentes.</p>
+                <p>Diseño y programo desde aplicativos que automatizan tu día a día, hasta Gemelos Digitales que te
+                    permiten simular el impacto de cada decisión antes de tomarla.</p>
+            </div>
+
+            <ul class="nav nav-pills flex-column gap-2 w-100 sidebar-tabs" role="tablist">
+                <li class="nav-item w-100" role="presentation">
+                    <a class="nav-link btn btn-outline-secondary border d-flex align-items-center justify-content-between active"
+                        id="tab-sobre-mi-mobile" data-bs-toggle="tab" href="#sobre-mi" role="tab"
+                        aria-controls="sobre-mi" aria-selected="true">
+                        Sobre mí
+                        <i class="bi bi-chevron-right ms-2"></i>
+                    </a>
+                </li>
+                <li class="nav-item w-100" role="presentation">
+                    <a class="nav-link btn btn-outline-secondary border d-flex align-items-center justify-content-between"
+                        id="tab-inicio-mobile" data-bs-toggle="tab" href="#sofwared" role="tab" aria-controls="sofwared"
+                        aria-selected="false" tabindex="-1">
+                        Sofwared
+                        <i class="bi bi-chevron-right ms-2"></i>
+                    </a>
+                </li>
+                <li class="nav-item w-100" role="presentation">
+                    <a class="nav-link btn btn-outline-secondary border d-flex align-items-center justify-content-between"
+                        id="tab-datos-mobile" data-bs-toggle="tab" href="#datos" role="tab" aria-controls="datos"
+                        aria-selected="false">
+                        Datos
+                        <i class="bi bi-chevron-right ms-2"></i>
+                    </a>
+                </li>
+                <li class="nav-item w-100" role="presentation">
+                    <a class="nav-link btn btn-outline-secondary border d-flex align-items-center justify-content-between"
+                        id="tab-proyectos-mobile" data-bs-toggle="tab" href="#proyectos" role="tab"
+                        aria-controls="proyectos" aria-selected="false">
+                        Proyectos
+                        <i class="bi bi-chevron-right ms-2"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- QR organizado como sección de la sidebar -->
+            <div class="text-center p-2">
+                <div id="qr-container-1" class="d-flex justify-content-center align-items-center"></div>
+                <small class="text-muted">Escanea este código para ir a la URL actual.</small>
+            </div>
+            <div class="text-center pb-3">
+                <button id="share-button"
+                    class="w-100 d-flex border justify-content-between align-items-center p-3 shadow badge text-black"
+                    style="background-color: var(--resaltador);font-size: 0.875rem;">
+                    <span class="flex-grow-1 text-start">Compartir Portafolio</span>
+                    <i class="bi bi-share-fill"></i>
+                </button>
+            </div>
+
+            <div class="mt-auto border-top pt-3">
+                <span class="text-muted small">© 2025 Yomar Echavarría</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Derecho (Offcanvas para pantallas pequeñas) -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="right-sidebar-offcanvas"
+        aria-labelledby="right-sidebar-label">
+        <div class="offcanvas-header flex-column align-items-stretch">
+            <button type="button" class="btn btn-outline-secondary align-self-end mb-2" data-bs-dismiss="offcanvas"
+                aria-label="Close">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <h5 class="offcanvas-title text-center w-100 mt-auto" id="right-sidebar-label">Info</h5>
+        </div>
+        <div class="offcanvas-body d-flex flex-column align-items-center p-3">
+            <!-- Contenido del sidebar derecho -->
+            <div id="rightSidebarCollapseMobile">
+                <div class="d-flex flex-column align-items-center">
+                    <!-- Fecha -->
+                    <div class="text-center mb-4">
+                        <div id="date-day-mobile" class="display-6 fw-bold text-secondary lh-1"></div>
+                        <div id="date-month-mobile" class="small text-white-50"></div>
+                        <div id="date-year-mobile" class="small text-white-50"></div>
                     </div>
-                    
-                    <!-- Uso de `nav` para las pestañas -->
-                    <ul class="nav nav-pills flex-column text-start">
-                        <!-- Vinculación de enlaces con las pestañas a través del atributo `data-bs-target` -->
+                    <!-- Texto vertical + línea divisora -->
+                    <div class="d-flex flex-column align-items-center my-3">
+                        <div class="texto-vertical text-secondary small text-uppercase lh-1"
+                            style="writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); letter-spacing: .06rem;">
+                            Encuentrame
+                        </div>
+                        <div class="bg-secondary mt-3 w-100" style="max-width:2px; height:90px;"></div>
+                    </div>
+                    <!-- Iconos sociales -->
+                    <div class="d-flex flex-column gap-3 my-3">
+                        <a href="https://wa.me/573053840193" class="text-secondary fs-4"><i
+                                class="bi bi-whatsapp"></i></a>
+                        <a href="https://www.linkedin.com/in/yomar-alejandro-echavarria/" class="text-secondary fs-4"><i
+                                class="bi bi-linkedin"></i></a>
+                        <a href="https://github.com/yomar009" class="text-secondary fs-4"><i
+                                class="bi bi-github"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de navegación (empujados al final) -->
+            <div class="d-flex flex-column gap-3 mt-auto pt-3">
+                <a type="button" class="btn btn-outline-secondary align-items-center justify-content-center"
+                    data-bs-dismiss="offcanvas" aria-label="Close">
+                    <i class="bi bi-layout-sidebar-inset-reverse"></i>
+                </a>
+                <a href="#" id="navigateUpBtnMobile"
+                    class="btn btn-outline-secondary align-items-center justify-content-center"><i
+                        class="bi bi-chevron-up"></i></a>
+                <a href="#" id="navigateDownBtnMobile"
+                    class="btn btn-outline-secondary align-items-center justify-content-center"><i
+                        class="bi bi-chevron-down"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botones Flotantes (Solo en móvil) -->
+    <div id="fab-container" class="position-fixed bottom-0 end-0 p-3 d-lg-none" style="z-index: 1055;">
+        <div class="d-flex flex-column gap-2">
+            <button class="btn btn-outline-secondary rounded-3 shadow" style="width: 50px; height: 50px;" type="button"
+                data-bs-toggle="offcanvas" data-bs-target="#right-sidebar-offcanvas"
+                aria-controls="right-sidebar-offcanvas">
+                <i class="bi bi-layout-sidebar-inset-reverse"></i>
+            </button>
+            <button id="fabNavigateUp" class="btn btn-outline-secondary rounded-3 shadow"
+                style="width: 50px; height: 50px;">
+                <i class="bi bi-chevron-up"></i>
+            </button>
+            <button id="fabNavigateDown" class="btn btn-outline-secondary rounded-3 shadow"
+                style="width: 50px; height: 50px;">
+                <i class="bi bi-chevron-down"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Contenedor principal de la aplicación con Flexbox -->
+    <div class="d-flex vh-100">
+        <!-- Sidebar Izquierdo (Fijo para pantallas grandes, scrollable si hace falta) -->
+        <aside class="d-none d-lg-flex flex-column flex-shrink-0 p-3 border-end left-sidebar-container overflow-auto"
+            style="width: 280px; max-height: 100vh;">
+            <img src="IMG_6135.jpeg" alt="Logo" style="width:100%;height:auto;object-fit:cover;" class="mb-3 rounded-2">
+            <div class="bio mb-3 form-text border-top border-bottom py-3" style="font-size: 0.875rem;">
+                <p>Me Especializo en la creación de ecosistemas tecnológicos inteligentes.</p>
+                <p>Diseño y programo desde aplicativos que automatizan tu día a día, hasta Gemelos Digitales que te
+                    permiten simular el impacto de cada decisión antes de tomarla.</p>
+            </div>
+
+            <ul class="nav nav-pills flex-column gap-2 w-100 sidebar-tabs" role="tablist">
+                <li class="nav-item w-100" role="presentation">
+                    <a class="nav-link btn btn-outline-secondary border d-flex align-items-center justify-content-between active"
+                        id="tab-sobre-mi-mobile" data-bs-toggle="tab" href="#sobre-mi" role="tab"
+                        aria-controls="sobre-mi" aria-selected="true">
+                        Sobre mí
+                        <i class="bi bi-chevron-right ms-2"></i>
+                    </a>
+                </li>
+                <li class="nav-item w-100" role="presentation">
+                    <a class="nav-link btn btn-outline-secondary border d-flex align-items-center justify-content-between"
+                        id="tab-inicio-mobile" data-bs-toggle="tab" href="#sofwared" role="tab" aria-controls="sofwared"
+                        aria-selected="false" tabindex="-1">
+                        Sofwared
+                        <i class="bi bi-chevron-right ms-2"></i>
+                    </a>
+                </li>
+                <li class="nav-item w-100" role="presentation">
+                    <a class="nav-link btn btn-outline-secondary border d-flex align-items-center justify-content-between"
+                        id="tab-datos-mobile" data-bs-toggle="tab" href="#datos" role="tab" aria-controls="datos"
+                        aria-selected="false">
+                        Datos
+                        <i class="bi bi-chevron-right ms-2"></i>
+                    </a>
+                </li>
+                <li class="nav-item w-100" role="presentation">
+                    <a class="nav-link btn btn-outline-secondary border d-flex align-items-center justify-content-between"
+                        id="tab-proyectos-mobile" data-bs-toggle="tab" href="#proyectos" role="tab"
+                        aria-controls="proyectos" aria-selected="false">
+                        Proyectos
+                        <i class="bi bi-chevron-right ms-2"></i>
+                    </a>
+                </li>
+            </ul>
+            <!-- QR organizado como sección de la sidebar -->
+            <div class="text-center p-2">
+                <div id="qr-container-2" class="d-flex justify-content-center align-items-center"></div>
+                <small class="text-muted">Escanea este código para ir a la URL actual.</small>
+            </div>
+
+            <div class="mt-auto border-top">
+                <span class="text-muted small">© 2025 Yomar Echavarría</span>
+            </div>
+        </aside>
+
+        <!-- Contenedor para el Menú Superior y el resto del contenido -->
+        <div class="d-flex flex-column flex-grow-1">
+            <!-- Menú de Navegación Superior -->
+            <nav class="navbar navbar-expand-lg border-bottom shadow-sm">
+                <div class="container-fluid">
+                    <!-- Botón para desplegar el sidebar (solo visible en pantallas pequeñas) -->
+                    <button class="btn btn-outline-secondary d-flex d-lg-none align-items-center p-" type="button"
+                        data-bs-toggle="offcanvas" data-bs-target="#main-sidebar" aria-controls="main-sidebar">
+                        <img src="IMG_6135.jpeg" alt="Logo" class="img-fluid rounded-2 me-2"
+                            style="max-width: 40px; height: auto;">
+                        <i class="bi bi-list fs-2" aria-hidden="true"></i>
+                    </button>
+                    <ul class="nav nav-pills ms-auto align-items-center gap-2 flex-row" style="flex-wrap:nowrap;">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="pill" href="#inicio"><i class="fas fa-house fa-fw me-2"></i>Inicio</a>
+                            <a class="btn btn-outline-secondary border-0" href="#">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="pill" href="#dashboard"><i class="fas fa-bookmark fa-fw me-2"></i>Habilidades</a>
+                        <li class="nav-item d-flex align-items-center justify-content-center">
+                            <button id="theme-toggler"
+                                class="btn btn-outline-secondary fs-5 ms-2 d-flex align-items-center justify-content-center btn-app">
+                                <i id="theme-icon" class="bi bi-sun-fill"></i>
+                            </button>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="pill" href="#sobre-mi"><i class="fas fa-user fa-fw me-2"></i>Sobre mí</a>
+                        <li class="nav-item dropdown">
+                            <a class="btn btn-outline-secondary border-0 dropdown-toggle" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Más
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                                <li><a class="dropdown-item" href="#">Opción extra</a></li>
+                            </ul>
                         </li>
                     </ul>
-                    
-                    <!-- Botón para abrir el Modal -->
-                    <div class="text-center mb-5 mt-2">
-                        <a class="btn btn-primary btn-lg scrollto" style="color: #fff;" data-bs-toggle="modal" data-bs-target="#contactModal">Contáctame</a>
-                    </div>
-
                 </div>
             </nav>
-        </header>
 
-        <!-- Contenido principal -->
-        <div class="tab-content content">
-            <!-- Sección de Inicio -->
-            <div class="tab-pane fade show active" id="inicio">
-                <section class="hero-section">
-                    <div class="hero-mask"></div>
-                    <div class="container text-center py-5">
-                        <div class="single-col-max mx-auto">
-                            <div class="hero-heading-upper pt-3 mb-3">Impulsa tu idea tecnológica <br class="d-md-none">con experiencia</div>
-                            <h1 class="hero-heading mb-5">
-                                <span class="brand mb-4 d-block"><span class="text-highlight pr-2">{ </span><span class="name">Yomar Alejandro Echavarría</span><span class="text-highlight pl-2"> }</span></span>
-                                <span class="desc d-block">Desarrollador Backend y Frontend especializado en soluciones web escalables</span>
-                            </h1>
-                            <div class="text-center mb-5">
-                                <a class="btn btn-primary btn-lg scrollto" data-bs-toggle="modal" data-bs-target="#contactModal">Contáctame</a>
-                            </div>
-                            
-                            <div class="hero-summary">
-                                <div class="row">
-                                    <!-- Diseño y Desarrollo -->
-                                    <div class="item col-12 col-md-4">
-                                        <div class="summary-desc mb-1"><i class="fas fa-laptop-code me-2"></i>Diseño y Desarrollo</div>
-                                        <h4 class="summary-heading">¡¡! Experto en <span class="desc">web escalable, dashboards y automatización.</span></h4>
-                                    </div>
-                            
-                                    <!-- Consultoría en TI -->
-                                    <div class="item col-12 col-md-4">
-                                        <div class="summary-desc mb-1"><i class="fas fa-chart-line me-2"></i>Consultoría en TI</div>
-                                        <h4 class="summary-heading">¡¡! Soluciones en <span class="desc">proyectos, finanzas y servidores.</span></h4>
-                                    </div>
-                            
-                                    <!-- Computación en la Nube -->
-                                    <div class="item col-12 col-md-4">
-                                        <div class="summary-desc mb-1"><i class="fas fa-cloud me-2"></i>Computación en la Nube</div>
-                                        <h4 class="summary-heading">¡¡! Experto en <span class="desc">almacenamiento seguro, datos masivos y CRM.</span></h4>
-                                    </div>                                    
+
+            <!-- Contenedor para el Contenido Principal y el Sidebar Derecho -->
+            <div class="d-flex flex-grow-1 overflow-hidden">
+                <!-- Contenido Principal -->
+                <main class="flex-grow-1 p-4">
+                    <div class="tab-content h-100">
+
+                        <!-- Sección de Sobre mí -->
+                        <div class="tab-pane fade h-100 active show" id="sobre-mi" role="tabpanel"
+                            aria-labelledby="tab-sobre-mi">
+                            <div class="card shadow-lg position-relative h-100 d-flex flex-column">
+                                <span class="vertical-text">-- SOBRE MÍ --</span>
+                                <div class="card-header bg-transparent border-bottom">
+                                    <h4 class="mb-0">Sobre mí</h4>
                                 </div>
-                            </div>
-                                               
-                            
-                            
-                        </div>
-                    </div>
-                </section>
-            </div>
-            
-           <!-- Sección de Dashboard -->
-            <div class="tab-pane fade" id="dashboard">
-                <section class="hero-section">
-                    <div class="hero-mask"></div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="section-title text-center mb-3 mt-3">
-                                    <h3 class="wow zoomIn" data-wow-delay=".2s">Habilidades</h3>
-                                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Servicios y Áreas de Conocimiento</h2>
-                                    <p class="wow fadeInUp" data-wow-delay=".6s">
-                                        Ofrezco una variedad de servicios y conocimientos especializados, desde desarrollo de software hasta automatización de procesos, que optimizan la eficiencia operativa y fomentan la innovación en múltiples áreas.
+                                <div class="card-body p-4 overflow-auto">
+
+                                    <p>
+                                        Soy un desarrollador y solucionador de problemas tecnológicos con un enfoque
+                                        especializado en:
+                                        <strong>automatización de procesos</strong> a través de software y el
+                                        <strong>análisis avanzado de datos</strong>. Mi punto guía a seguir es la
+                                        construcción de ecosistemas
+                                        tecnológicos que optimicen y simplifique los mas posible el trabajo previsto,
+                                        con enfoques que proporcionen una visión profunda y
+                                        predictiva del negocio.
                                     </p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <!-- Panel de la izquierda -->
-                            <div class="col-lg-6 col-md-12">
-                                <h3 class="text-center mb-4">Enfoque a Negocios y Finanzas</h3>
-                                <div class="accordion" id="accordionAll"> <!-- Contenedor común para todos los acordeones -->
-                                    <!-- Optimización Empresarial con CRM -->
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="heading1">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                                <span class="title">Optimización Empresarial con CRM</span>
-                                                <i class="lni lni-plus"></i>
-                                            </button>
-                                        </h2>
-                                        <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#accordionAll">
-                                            <div class="accordion-body">
-                                                <p>Desarrollar y personalizar CRM a medida para cada empresa no solo optimiza la gestión de clientes, ventas y operaciones, sino que también facilita la integración con Microsoft Dynamics 365. Esta integración centraliza la información, mejora la eficiencia operativa, y permite una toma de decisiones ágil y coherente, mejorando la experiencia en todos los procesos comerciales.</p>
+
+                                    <hr class="my-4">
+
+                                    <div class="row">
+                                        <div class="col-md-6 d-flex align-items-start mb-4">
+                                            <i class="bi bi-stack fs-4 text-dark me-3" style="min-width: 25px;"></i>
+                                            <div>
+                                                <h5 class="fw-bold mb-1">Background y Desarrollo</h5>
+                                                <p class="text-secondary mb-0">
+                                                    Vengo de un background en <strong>desarrollo Fullstack</strong> y
+                                                    consultoría TI en diferentes aplicativos, donde diseñé y aprendí a
+                                                    traducir estas necesidades
+                                                    empresariales en aplicaciones robustas y escalables. Hoy, aplico esa
+                                                    experiencia para
+                                                    diseñar y programar aplicativos de automatización (frontend y
+                                                    backend)
+                                                    que se convierten en una firme y sólida columna vertebral de la
+                                                    eficiencia
+                                                    operativa.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 d-flex align-items-start mb-4">
+                                            <i class="bi bi-diagram-3-fill fs-4 text-dark me-3"
+                                                style="min-width: 25px;"></i>
+                                            <div>
+                                                <h5 class="fw-bold mb-1">Inteligencia de Datos y Gemelos Digitales</h5>
+                                                <p class="text-secondary mb-0">
+                                                    Mi pasión es transformar datos y aplicarlos en una inteligencia
+                                                    accionable.
+                                                    llevando una implementación de un ciclo de análisis adaptativo con
+                                                    la finalidad de crear un
+                                                    <strong>Gemelos Digitales</strong>: réplicas virtuales dinámicas que
+                                                    reflejan el estado y datos, así mismo
+                                                    permiten simular escenarios, predecir resultados y tomar decisiones
+                                                    estratégicas con una precisión sin precedentes.
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
-                        
-                                    <!-- Análisis Financiero y Decisiones Estratégicas -->
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="heading2">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                                <span class="title">Análisis Financiero y Decisiones Estratégicass</span>
-                                                <i class="lni lni-plus"></i>
-                                            </button>
-                                        </h2>
-                                        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordionAll">
-                                            <div class="accordion-body">
-                                                <p>Mediante el uso de herramientas avanzadas como Python, R, y Power BI, realizo análisis financieros detallados que proporcionan una visión clara del rendimiento económico. Estas herramientas permiten la visualización de datos masivos y la automatización de informes, facilitando la toma de decisiones estratégicas fundamentadas en datos precisos.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                        
-                                    <!-- Desarrollo y Personalización de CRM -->
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="heading3">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                                <span class="title">Desarrollo y Personalización de CRM para Optimización del Trabajo</span>
-                                                <i class="lni lni-plus"></i>
-                                            </button>
-                                        </h2>
-                                        <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordionAll">
-                                            <div class="accordion-body">
-                                                <p>Crear y personalizar CRM adaptados a las necesidades de cada empresa permite no solo gestionar clientes y ventas, sino también automatizar procesos y mejorar la eficiencia en las operaciones diarias. Estas soluciones tecnológicas optimizan el flujo de trabajo, aceleran la toma de decisiones y aumentan la productividad a nivel organizacional.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <!-- Panel de la derecha -->
-                            <div class="col-lg-6 col-md-12">
-                                <h3 class="text-center mb-4">Enfoque a Servicios y Automatización</h3>
-                                <div class="accordion" id="accordionAll2"> <!-- Misma estructura de acordeones compartida con la izquierda -->
-                                    <!-- Automatización de Flujos CI/CD -->
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="heading4">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                                <span class="title">Automatización de Flujos CI/CD</span>
-                                                <i class="lni lni-plus"></i>
-                                            </button>
-                                        </h2>
-                                        <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordionAll2">
-                                            <div class="accordion-body">
-                                                <p>Implemento flujos de integración continua y despliegue continuo (CI/CD), utilizando herramientas como Docker y Kubernetes, para optimizar el ciclo de vida de las aplicaciones. Esto asegura un desarrollo ágil y continuo, con entregas más rápidas, seguras y sin interrupciones, mejorando la productividad y reduciendo riesgos en el proceso de despliegue.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                        
-                                    <!-- Microservicios -->
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="heading5">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                                                <span class="title">Gestión de Microservicios Escalables</span>
-                                                <i class="lni lni-plus"></i>
-                                            </button>
-                                        </h2>
-                                        <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#accordionAll2">
-                                            <div class="accordion-body">
-                                                <p>La creación de microservicios escalables y seguros permite una arquitectura flexible y eficiente que soporta aplicaciones de alto rendimiento y demanda. Utilizando tecnologías como Docker y Kubernetes, diseño soluciones que pueden adaptarse al crecimiento continuo de la empresa, asegurando la disponibilidad y fiabilidad de los servicios.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                        
-                                    <!--  Infraestructura  -->
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="heading6">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                                                <span class="title">Optimización de Infraestructura Tecnológica</span>
-                                                <i class="lni lni-plus"></i>
-                                            </button>
-                                        </h2>
-                                        <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6" data-bs-parent="#accordionAll2">
-                                            <div class="accordion-body">
-                                                <p>Gestionar servidores Linux y configurar servicios como Apache y Nginx permite optimizar la infraestructura tecnológica de las empresas. Mejoro la seguridad, el rendimiento y la capacidad de las aplicaciones, asegurando que estén siempre disponibles y funcionando de manera eficiente, incluso durante picos de demanda o cambios en la infraestructura.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                                              
-                        
-                        <div class="container my-2"> <!-- Cambiado my-5 a my-3 -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="img-container">
-                                        <img src="fintech.png" alt="Imagen 1" class="img-fluid rounded shadow" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="img-container">
-                                        <img src="dashboard.png" alt="Imagen 2" class="img-fluid rounded shadow" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                
-            </div>
 
 
-            
-            <!-- Sección de Sobre mí -->
-            <div class="tab-pane fade" id="sobre-mi">
-                <section class="hero-section">
-                    <div class="hero-mask"></div>
-                    <div class="container">
-                        <div class="row text-center">
-                            <div class="col-12">
-                                <div class="section-title mb-4 mt-5">
-                                    <h3 class="wow zoomIn" data-wow-delay=".2s">Sobre mí</h3>
-                                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Áreas de Conocimiento</h2>
-                                    <p class="wow fadeInUp" data-wow-delay=".6s">
-                                        Descubre cómo mis servicios pueden aportar valor a tus proyectos tecnológicos y cumplir con tus objetivos de negocio.
+                                    <div class="mt-4 pt-3 border-top">
+                                        <h6 class="text-uppercase text-muted mb-3">Pilares de mi Expertise</h6>
+                                        <div class="row g-3">
+
+                                            <div class="col-12 col-md-4">
+                                                <div
+                                                    class="border bg-light-subtle rounded-3 p-3 text-center h-100 shadow">
+                                                    <i class="bi bi-laptop fs-2 text-black d-inline-flex align-items-center justify-content-center rounded-2 mb-4 border"
+                                                        style="width: 50px; height: 50px; background-color: var(--resaltador);"></i>
+                                                    <h6 class="fw-bold mt-2">Diseño y Desarrollo</h6>
+                                                    <p class="small text-secondary mb-0">Gemelo digital, dashboards y
+                                                        automatización.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-4">
+                                                <div
+                                                    class="border bg-light-subtle rounded-3 p-3 text-center h-100 shadow">
+                                                    <i class="bi bi-file-earmark-bar-graph-fill fs-2 text-black d-inline-flex align-items-center justify-content-center rounded-2 mb-4 border"
+                                                        style="width: 50px; height: 50px; background-color: var(--resaltador);"></i>
+                                                    <h6 class="fw-bold mt-2">Infraestructura y Datos</h6>
+                                                    <p class="small text-secondary mb-0">Soluciones IA, Datos y
+                                                        Analítica.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-4">
+                                                <div
+                                                    class="border bg-light-subtle rounded-3 p-3 text-center h-100 shadow">
+                                                    <i class="bi bi-cloud-fill fs-2 text-black d-inline-flex align-items-center justify-content-center rounded-2 mb-4 border"
+                                                        style="width: 50px; height: 50px; background-color: var(--resaltador);"></i>
+                                                    <h6 class="fw-bold mt-2">Diseño en nube</h6>
+                                                    <p class="small text-secondary mb-0">Almacenamiento seguro, gestion
+                                                        de datos y CRM.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-12">
+                                                <div
+                                                    class="border bg-light-subtle rounded-3 p-3 text-center h-100 shadow">
+                                                    <h6 class="fw-bold mt-2">Mi filosofía</h6>
+                                                    <p class="small text-secondary mb-0">Tengo una creencia muy firme de
+                                                        que la
+                                                        tecnología debe ser un motor de la eficiencia y la innovación en
+                                                        desarrollo de herramientas de trabajo que potencien las
+                                                        capacidades humanas,
+                                                        en mi vida profesional me dedico a construir ese plus del
+                                                        potencial a solucionar tangibles.</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div>
+                                        <h5 class="fw-bold mb-3">De Hobby a Profesión: Una Vida de Curiosidad</h5>
+                                        <div class="row g-3">
+                                            <div class="col-12 col-md-4">
+                                                <div class="d-flex align-items-start">
+                                                    <i class="bi bi-joystick fs-2 text-dark me-3"></i>
+                                                    <div>
+                                                        <p class="fw-bold mb-1">Infraestructura Gamer</p>
+                                                        <p class="small text-secondary mb-0">
+                                                            Mi pasión por los videojuegos me llevó a <strong>Montar y
+                                                                administrar distintos servidores (Minecraft, CoD) Xbox
+                                                                360 y PC.</strong> Esta
+                                                            experiencia fue mas que un campo de entrenamiento me ayudo a
+                                                            conocer algunas pasiones desde joven
+                                                            y dominar la administración de sistemas Linux.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="d-flex align-items-start">
+                                                    <i class="bi bi-cpu-fill fs-2 text-dark me-3"></i>
+                                                    <div>
+                                                        <p class="fw-bold mb-1">Domótica DIY</p>
+                                                        <p class="small text-secondary mb-0">
+                                                            Experimentando con <strong>Arduino</strong> y
+                                                            <strong>ESP//</strong> para crear automatizaciones para el
+                                                            hogar integraciones con ecosistemas como <strong>Apple
+                                                                Home</strong> y <strong>Google Home</strong>.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="d-flex align-items-start">
+                                                    <i class="bi bi-easel-fill fs-2 text-dark me-3"></i>
+                                                    <div>
+                                                        <p class="fw-bold mb-1">Compartiendo Conocimiento</p>
+                                                        <p class="small text-secondary mb-0">
+                                                            Disfruté de enseñar en fundaciones y
+                                                            institutos las bases de la programación enfocada en micro
+                                                            clases a través de
+                                                            <strong>clases de Scratch</strong>.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer text-muted"
+                                    style="background-color: var(--resaltador) !important;">
+                                    <small class="text-black">Sobre mí — Información y Pasiones</small>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sección de Software -->
+                        <div class="tab-pane fade h-100" id="sofwared" role="tabpanel" aria-labelledby="tab-sofwared">
+                            <div class="card shadow-lg position-relative h-100 d-flex flex-column">
+                                <span class="vertical-text">-- Desarrollo de Aplicativos de Automatización --</span>
+                                <div class="card-header bg-transparent border-bottom">
+                                    <h4 class="mb-0">Desarrollo de Aplicativos de Automatización</h4>
+                                </div>
+                                <div class="card-body p-4 overflow-auto">
+
+                                    <div>
+                                        <h5 class="fw-bold">Mi Filosofía de Desarrollo</h5>
+                                        <p class="text-secondary">
+                                            Creo que el mejor software es aquel que se vuelve invisible: las
+                                            herramientas
+                                            que trabajan más eficientemente permiten a todos los equipos centrarse en
+                                            la estrategia y la creatividad. Siempre pienso que mi enfoque se centra en
+                                            construir soluciones integrales <strong>(frontend y backend)</strong> que
+                                            sean robustas, intuitivas y escalables, eliminando cuellos de botella y
+                                            optimizando los flujos de trabajo que son críticos del negocio.
+                                        </p>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div>
+                                        <h5 class="fw-bold mb-4">Capacidades de Desarrollo</h5>
+
+                                        <div class="d-flex align-items-start mb-4">
+                                            <i class="bi bi-stack fs-2 text-dark me-4"></i>
+                                            <div>
+                                                <h6 class="fw-bold mb-1">Desarrollo Fullstack (Frontend & Backend)</h6>
+                                                <ul class="list-unstyled text-secondary mb-0">
+                                                    <li><i class="bi bi-check-lg me-2"></i><strong>Experto en
+                                                            Frontend</strong> con dominio de <strong>HTML5, CSS3 y
+                                                            Bootstrap</strong> para la maquetación y estructuración de
+                                                        sitios de información con arquitecturas responsivas.</li>
+                                                    <li><i class="bi bi-check-lg me-2"></i>Diseño e implementación de
+                                                        <strong>dashboards interactivos</strong>, integrando la
+                                                        visualización de datos con diversas tecnologías backend.
+                                                    </li>
+                                                    <li><i class="bi bi-check-lg me-2"></i><strong>Desarrollador experto
+                                                            en Python</strong> para el backend, con experiencia sólida
+                                                        en frameworks como <strong>Flask, Django y FastAPI de desarrollo
+                                                            web</strong> y <strong>Pandas, NumPy, Matplotlib y Seaborn,
+                                                            como Analisis de datos</strong>.
+                                                    </li>
+                                                    <li><i class="bi bi-check-lg me-2"></i>Amplia experiencia con
+                                                        <strong>JavaScript</strong> para añadir dinamismo y lógica en
+                                                        el lado del cliente.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex align-items-start mb-4">
+                                            <i class="bi bi-braces-asterisk fs-2 text-dark me-4"></i>
+                                            <div>
+                                                <h6 class="fw-bold mb-1">Integración y Automatización (Google Workspace)
+                                                </h6>
+                                                <ul class="list-unstyled text-secondary mb-0">
+                                                    <li><i class="bi bi-check-lg me-2"></i>Automatización de flujos de
+                                                        trabajo con <strong>Google Apps Script</strong>.</li>
+                                                    <li><i class="bi bi-check-lg me-2"></i>Manipulación de documentos
+                                                        vía API: <strong>Docs, Sheets, Slides</strong>.</li>
+                                                    <li><i class="bi bi-check-lg me-2"></i>Gestión programática de
+                                                        <strong>Google Drive</strong> y automatización de
+                                                        <strong>correos</strong>.
+                                                    </li>
+                                                    <li><i class="bi bi-check-lg me-2"></i>Implementación de agentes de
+                                                        IA personalizados con la <strong>API de Gemini</strong>.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex align-items-start mb-4">
+                                            <i class="bi bi-cloud-arrow-up-fill fs-2 text-dark me-4"></i>
+                                            <div>
+                                                <h6 class="fw-bold mb-1">Infraestructura y Servidores</h6>
+                                                <ul class="list-unstyled text-secondary mb-0">
+                                                    <li><i class="bi bi-check-lg me-2"></i>Administración de servidores
+                                                        <strong>Linux (Servidor HTTP)</strong> y domino el uso de la
+                                                        línea de comandos.
+                                                    </li>
+                                                    <li><i class="bi bi-check-lg me-2"></i>Despliegue en plataformas
+                                                        cloud <strong>(AWS, Google Cloud)</strong> y servidores privados
+                                                        virtuales <strong>(VPS)</strong>.</li>
+                                                    <li><i class="bi bi-check-lg me-2"></i>Gestión de <strong>dominios,
+                                                            correos corporativos</strong> y administración de
+                                                        <strong>Google Workspace</strong>.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div>
+                                        <h5 class="fw-bold mb-3">Tecnologías Principales</h5>
+                                        <div class="row g-3 text-center">
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-filetype-html me-2"></i>HTML5</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-filetype-css me-2"></i>CSS3</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-filetype-js me-2"></i>JavaScript</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-filetype-py me-2"></i>Python</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-google me-2"></i>Apps Script</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-google me-2"></i>Drive API</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-stars me-2"></i>Gemini AI</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-amazon me-2"></i>AWS</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-google me-2"></i>Google Cloud</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-filetype-py me-2"></i>Flask</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-filetype-py me-2"></i>Django</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-filetype-py me-2"></i>FastAPI</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-hdd-stack me-2"></i>Servidores HTTP</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-hdd-network-fill me-2"></i>VPS</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-globe2 me-2"></i>Dominios</div>
+                                            </div>
+                                            <div class="col-6 col-md-3 col-lg-2">
+                                                <div class="p-2 border rounded-3 bg-light-subtle"><i
+                                                        class="bi bi-terminal-fill me-2"></i>Linux</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-transparent border-top text-black"
+                                    style="background-color: var(--resaltador) !important;">
+                                    <small>Desarrollo de Aplicativos de Automatización — Información introductoria y
+                                        contacto</small>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sección de Datos -->
+                        <div class="tab-pane fade h-100" id="datos" role="tabpanel" aria-labelledby="tab-datos">
+                            <div class="card shadow-lg position-relative h-100 d-flex flex-column">
+                                <span class="vertical-text">-- Análisis de Datos y Gemelo Digital --</span>
+                                <div class="card-header bg-transparent border-bottom">
+                                    <h4 class="mb-0">Análisis de Datos y Gemelo Digital</h4>
+                                </div>
+                                <div class="card-body p-4 overflow-auto">
+
+                                    <p>
+                                        Los dashboards nos dicen qué pasó. Me especializo en construir sistemas que
+                                        nos dicen <strong>qué pasará</strong> y <strong>qué deberíamos hacer al
+                                            respecto</strong>. Mi enfoque se basa en un ciclo de análisis de datos
+                                        adaptativo, diseñado para
+                                        evolucionar junto con la organización y culminar en la creación de su Gemelo
+                                        Digital.
                                     </p>
+
+                                    <hr class="my-4">
+
+                                    <div>
+                                        <h5 class="fw-bold mb-4">El Ciclo de Análisis Adaptativo</h5>
+                                        <div class="d-flex mb-3">
+                                            <div class="me-3">
+                                                <span
+                                                    class="p-2 d-flex align-items-center justify-content-center text-black badge border"
+                                                    style="width: 32px; height: 32px; background-color: var(--resaltador);">1</span>
+                                            </div>
+                                            <div>
+                                                <h6 class="fw-bold mb-1"><i
+                                                        class="bi bi-clipboard-data-fill me-2"></i>Diagnóstico del
+                                                    Ecosistema de Datos</h6>
+                                                <p class="small text-secondary mb-0">Auditoría de fuentes de datos,
+                                                    flujos de información y KPIs críticos del negocio.</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mb-3">
+                                            <div class="me-3">
+                                                <span
+                                                    class="p-2 d-flex align-items-center justify-content-center text-black badge border"
+                                                    style="width: 32px; height: 32px; background-color: var(--resaltador);">2</span>
+                                            </div>
+                                            <div>
+                                                <h6 class="fw-bold mb-1"><i
+                                                        class="bi bi-diagram-2-fill me-2"></i>Ingeniería de Datos
+                                                    Robusta</h6>
+                                                <p class="small text-secondary mb-0">Construcción de pipelines fiables
+                                                    con Python (Pandas) y SQL para extraer, limpiar y centralizar la
+                                                    información.</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mb-3">
+                                            <div class="me-3">
+                                                <span
+                                                    class="p-2 d-flex align-items-center justify-content-center text-black badge border"
+                                                    style="width: 32px; height: 32px; background-color: var(--resaltador);">3</span>
+                                            </div>
+                                            <div>
+                                                <h6 class="fw-bold mb-1"><i
+                                                        class="bi bi-graph-up-arrow me-2"></i>Análisis Predictivo</h6>
+                                                <p class="small text-secondary mb-0">Uso de modelos estadísticos y de
+                                                    machine learning para identificar patrones y predecir tendencias.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="me-3">
+                                                <span
+                                                    class="p-2 d-flex align-items-center justify-content-center text-black badge border"
+                                                    style="width: 32px; height: 32px; background-color: var(--resaltador);">4</span>
+                                            </div>
+                                            <div>
+                                                <h6 class="fw-bold mb-1"><i class="bi bi-gem me-2"></i>Creación del
+                                                    Gemelo Digital</h6>
+                                                <p class="small text-secondary mb-0">Integración de datos en tiempo real
+                                                    con modelos predictivos para crear una réplica virtual y dinámica de
+                                                    la organización.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div>
+                                        <h5 class="fw-bold">¿Qué es un Gemelo Digital y cómo Aporta Valor?</h5>
+                                        <p class="text-secondary">Un Gemelo Digital es un modelo virtual que actúa como
+                                            la contraparte digital de un proceso físico o de negocio. Se actualiza
+                                            constantemente con datos reales y nos permite:</p>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="p-3 border rounded-3 bg-light-subtle h-100 shadow">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-bezier fs-4 me-3 "></i>
+                                                        <h6 class="fw-bold mb-0">Simular Escenarios</h6>
+                                                    </div>
+                                                    <p class="small text-secondary mt-2 mb-0">Probar el impacto de
+                                                        decisiones estratégicas sin arriesgar recursos en el mundo real.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="p-3 border rounded-3 bg-light-subtle h-100 shadow">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-sliders fs-4 me-3 "></i>
+                                                        <h6 class="fw-bold mb-0">Optimización Predictiva</h6>
+                                                    </div>
+                                                    <p class="small text-secondary mt-2 mb-0">Identificar ineficiencias
+                                                        y optimizar procesos antes de que ocurran problemas.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="p-3 border rounded-3 bg-light-subtle h-100 shadow">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-broadcast-pin fs-4 me-3 "></i>
+                                                        <h6 class="fw-bold mb-0">Monitoreo Inteligente</h6>
+                                                    </div>
+                                                    <p class="small text-secondary mt-2 mb-0">Supervisar la salud de la
+                                                        organización en tiempo real y recibir alertas predictivas.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div class="container my-5">
+                                        <div class="row justify-content-center align-items-center position-relative">
+                                            <div class="row">
+                                                <div class="col-12 col-md-6 mb-4">
+                                                    <div class="card border shadow h-100">
+                                                        <div class="card-header text-center fw-bold">
+                                                            1. Integración de Datos
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <p class="card-text small">Conectar y unificar todos los
+                                                                datos de la empresa en una plataforma segura para crear
+                                                                una fuente de verdad única.</p>
+                                                        </div>
+                                                        <div
+                                                            class="card-footer bg-light-subtle text-center small text-uppercase fw-bold">
+                                                            Entrada
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6 mb-4">
+                                                    <div class="card border shadow h-100">
+                                                        <div class="card-header text-center fw-bold">
+                                                            2. Modelacion de Datos
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <p class="card-text small">Transformar datos brutos en un
+                                                                "gemelo digital" del negocio, definiendo objetos y sus
+                                                                relaciones para entender el contexto.</p>
+                                                        </div>
+                                                        <div
+                                                            class="card-footer bg-light-subtle text-center small text-uppercase fw-bold">
+                                                            Transformación
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="col-12 justify-content-center align-items-center text-center my-4">
+                                                    <div class="col-12 col-md-4 mx-auto">
+                                                        <div class="border rounded-2 ">
+                                                            <i class="bi bi-diagram-3-fill fs-1 mb-2"></i>
+                                                            <h3 class="fw-bold">Nivel de Dato</h3>
+                                                            <p class="text-secondary small">El Gemelo Digital</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6 mb-4">
+                                                    <div class="card border shadow h-100">
+                                                        <div class="card-header text-center fw-bold">
+                                                            3. Análisis e Interacción
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <p class="card-text small">Explorar el gemelo digital para
+                                                                descubrir patrones, ejecutar simulaciones ("what-if") y
+                                                                usar IA para obtener predicciones.</p>
+                                                        </div>
+                                                        <div
+                                                            class="card-footer bg-light-subtle text-center small text-uppercase fw-bold">
+                                                            Exploración
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6 mb-4">
+                                                    <div class="card border shadow h-100">
+                                                        <div class="card-header text-center fw-bold">
+                                                            4. Acción y Write-Back
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <p class="card-text small">Convertir decisiones en acciones
+                                                                operativas, escribiendo los cambios de vuelta a los
+                                                                sistemas de origen y cerrando el ciclo.</p>
+                                                        </div>
+                                                        <div
+                                                            class="card-footer bg-light-subtle text-center small text-uppercase fw-bold">
+                                                            Salida
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer border-top text-black"
+                                    style="background-color: var(--resaltador) !important;">
+                                    <small>Datos — Áreas de conocimiento y servicios</small>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <!-- Servicio 1 -->
-                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".2s">
-                                <div class="single-service">
-                                    <div class="main-icon">
-                                        <i class="lni lni-grid-alt"></i>
-                                    </div>
-                                    <h4 class="text-title">Diseño y Desarrollo Web</h4>
-                                    <p>Creación de sitios web responsivos, con enfoque en UX/UI para una experiencia de usuario óptima.</p>
-                                    <p><strong>Tech:</strong> HTML, CSS, JavaScript, Bootstrap, Django, Flask.</p>
+                        <!-- Sección de Proyectos -->
+                        <div class="tab-pane fade h-100" id="proyectos" role="tabpanel" aria-labelledby="tab-proyectos">
+                            <div class="card shadow-lg position-relative h-100 d-flex flex-column">
+                                <span class="vertical-text">-- Mi Portafolio de Proyectos --</span>
+                                <div class="card-header bg-transparent border-bottom">
+                                    <h4 class="mb-0">Proyectos Destacados</h4>
                                 </div>
-                            </div>
-                            <!-- Servicio 2 -->
-                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".4s">
-                                <div class="single-service">
-                                    <div class="main-icon">
-                                        <i class="lni lni-keyword-research"></i>
+                                <div class="card-body p-4 overflow-auto">
+                                    <p class="mb-4 text-secondary">
+                                        Presento algunos proyectos clave desarrollados sobre arquitecturas cloud, donde
+                                        aplico análisis estadístico y Business Intelligence para resolver problemas
+                                        complejos.
+                                        Se enfocan en construir soluciones que convierten datos en decisiones
+                                        estratégicas.
+                                    </p>
+                                    <hr class="my-4">
+                                    <div>
+                                        <h5 class="fw-bold mb-3 d-flex align-items-center">
+                                            <i class="bi bi-mortarboard-fill me-2" style="font-size: 1.3rem;"></i>
+                                            Analítica Predictiva para Rendimiento Estudiantil
+                                        </h5>
+                                        <p class="text-secondary">
+                                            Desarrollé un sistema que aplica modelos estadísticos para predecir el
+                                            riesgo de deserción en estudiantes becados. Al analizar variables de
+                                            rendimiento, la plataforma genera alertas tempranas que permiten una
+                                            intervención focalizada, optimizando así la asignación de recursos de apoyo
+                                            y mejorando las tasas de retención.
+                                        </p>
                                     </div>
-                                    <h4 class="text-title">Consultoría en TI</h4>
-                                    <p>Optimización de procesos y estrategias tecnológicas personalizadas para empresas.</p>
-                                    <p><strong>Tech:</strong> Auditoría tecnológica, Microsoft Dynamics 365.</p>
+                                    <hr class="my-4">
+                                    <div>
+                                        <h5 class="fw-bold mb-3 d-flex align-items-center">
+                                            <i class="bi bi-diagram-3-fill me-2" style="font-size: 1.3rem;"></i>
+                                            Gestión de Portafolios de Proyectos (PMO)
+                                        </h5>
+                                        <p class="text-secondary">
+                                            Creé una plataforma para el análisis cuantitativo de proyectos, El sistema
+                                            integra las tres variables fundamentales de la gestión: <strong>Método,
+                                                Costo y Tiempo</strong>. La solución ofrece <strong>visualizaciones de
+                                                datos</strong> interactivas como cronogramas dinámicos tipo
+                                            <strong>Gantt</strong> para un seguimiento intuitivo. Mediante la conexión
+                                            con ERPs como SAP, el sistema construye <strong>modelos de
+                                                presupuesto</strong> detallados (Capex/Opex) y facilita
+                                            <strong>evaluaciones financieras</strong> para analizar la viabilidad y el
+                                            retorno de la inversión, permitiendo pronosticar desviaciones y optimizar la
+                                            asignación de capital para la toma de decisiones estratégicas.
+                                        </p>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div>
+                                        <h5 class="fw-bold mb-3 d-flex align-items-center">
+                                            <i class="bi bi-buildings-fill me-2" style="font-size: 1.3rem;"></i>
+                                            Business Intelligence para Propiedades Horizontales
+                                        </h5>
+                                        <p class="text-secondary">
+                                            Implementé una solución de BI para la administración financiera de complejos
+                                            residenciales. La plataforma automatiza la comunicación y los cálculos, pero
+                                            su núcleo es el análisis de cartera. Genera pronósticos de flujo de caja y
+                                            dashboards con KPIs clave para optimizar la cobranza, reducir la morosidad y
+                                            garantizar la salud financiera de la comunidad.
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Servicio 3 -->
-                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".6s">
-                                <div class="single-service">
-                                    <div class="main-icon">
-                                        <i class="lni lni-cloud-network"></i>
-                                    </div>
-                                    <h4 class="text-title">Computación en la Nube</h4>
-                                    <p>Soluciones en la nube para asegurar escalabilidad y alta disponibilidad en tu infraestructura.</p>
-                                    <p><strong>Tech:</strong> AWS, Google Cloud, Docker, Kubernetes.</p>
-                                </div>
-                            </div>
-                            <!-- Servicio 4 -->
-                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".2s">
-                                <div class="single-service">
-                                    <div class="main-icon">
-                                        <i class="lni lni-code"></i>
-                                    </div>
-                                    <h4 class="text-title">Lenguajes y Tecnologías</h4>
-                                    <p>Soluciones escalables usando Python, Flask, Django, C++, .NET, y más.</p>
-                                    <p><strong>Tech:</strong> Python, JavaScript, SQL, Dashboards.</p>
-                                </div>
-                            </div>
-                            <!-- Servicio 5 -->
-                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".4s">
-                                <div class="single-service">
-                                    <div class="main-icon">
-                                        <i class="lni lni-server"></i>
-                                    </div>
-                                    <h4 class="text-title">Gestión de Servidores</h4>
-                                    <p>Administración de servidores Linux y despliegue de microservicios con Docker y Kubernetes.</p>
-                                    <p><strong>Tech:</strong> Linux, Apache, Nginx, Docker, Kubernetes.</p>
-                                </div>
-                            </div>
-                            <!-- Servicio 6 -->
-                            <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".6s">
-                                <div class="single-service">
-                                    <div class="main-icon">
-                                        <i class="lni lni-bar-chart"></i>
-                                    </div>
-                                    <h4 class="text-title">Análisis de Datos</h4>
-                                    <p>Análisis estadístico y visualización de datos para toma de decisiones informadas.</p>
-                                    <p><strong>Tech:</strong> Python, R, Pandas, SQL, Matplotlib.</p>
+                                <div class="card-footer border-top text-black"
+                                    style="background-color: var(--resaltador) !important;">
+                                    <small>Portafolio — Soluciones de Analítica y Business Intelligence</small>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Botón para abrir el Modal -->
-                        <div class="text-center mb-5 mt-2">
-                            <a class="btn btn-primary btn-lg scrollto" style="color: #fff;" data-bs-toggle="modal" data-bs-target="#contactModal">Contáctame</a>
+
+
+                    </div>
+                </main>
+                <!-- Sidebar Derecho (Fijo para pantallas grandes) -->
+                <aside id="right-sidebar" class="d-none d-lg-flex flex-column align-items-center p-3 border-start">
+                    <!-- Contenido del sidebar derecho -->
+                    <div id="rightSidebarCollapseDesktop">
+                        <div class="d-flex flex-column align-items-center">
+                            <!-- Fecha -->
+                            <div class="text-center mb-4">
+                                <div id="date-day" class="display-6 fw-bold text-secondary lh-1"></div>
+                                <div id="date-month" class="small text-white-50"></div>
+                                <div id="date-year" class="small text-white-50"></div>
+                            </div>
+                            <!-- Texto vertical + línea divisora -->
+                            <div class="d-flex flex-column align-items-center my-3">
+                                <div class="texto-vertical text-secondary small text-uppercase lh-1"
+                                    style="writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); letter-spacing: .06rem;">
+                                    Encuentrame
+                                </div>
+                                <div class="bg-secondary mt-3 w-100" style="max-width:2px; height:90px;"></div>
+                            </div>
+                            <!-- Iconos sociales -->
+                            <div class="d-flex flex-column gap-3 my-3">
+                                <a href="https://wa.me/573053840193" class="text-secondary fs-4"><i
+                                        class="bi bi-whatsapp"></i></a>
+                                <a href="https://www.linkedin.com/in/yomar-alejandro-echavarria/"
+                                    class="text-secondary fs-4"><i class="bi bi-linkedin"></i></a>
+                                <a href="https://github.com/yomar009" class="text-secondary fs-4"><i
+                                        class="bi bi-github"></i></a>
+                            </div>
                         </div>
                     </div>
-                </section>                
+                    <!-- Botones de navegación (empujados al final) -->
+                    <div class="d-flex flex-column gap-3 mt-auto pt-3">
+                        <a href="#" id="navigateUpBtn"
+                            class="btn btn-outline-secondary align-items-center justify-content-center"><i
+                                class="bi bi-chevron-up"></i></a>
+                        <a href="#" id="navigateDownBtn"
+                            class="btn btn-outline-secondary align-items-center justify-content-center"><i
+                                class="bi bi-chevron-down"></i></a>
+                    </div>
+                </aside>
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="contactModalLabel">Contáctame</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <p>Elige una plataforma para contactarme:</p>
-                    <div class="d-flex justify-content-center gap-3">
-                        <!-- Botón de WhatsApp -->
-                        <a href="https://wa.me/573053840193" target="_blank" class="btn btn-success rounded-pill">
-                            <i class="fab fa-whatsapp"></i> WhatsApp
-                        </a>
-                        <!-- Botón de LinkedIn -->
-                        <a href="https://www.linkedin.com/in/yomar-alejandro-echavarria/" target="_blank" class="btn btn-info rounded-pill">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                        <!-- Botón de GitHub -->
-                        <a href="https://github.com/yomar009" target="_blank" class="btn btn-dark rounded-pill">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <!-- Contenedor oculto para Google Translate -->
+    <div id="google_translate_element" style="display: none;"></div>
 
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // --- Manejo de tema ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggler = document.getElementById('theme-toggler');
+            const themeIcon = document.getElementById('theme-icon');
+            const htmlEl = document.documentElement;
+
+            function applyTheme(theme) {
+                htmlEl.setAttribute('data-bs-theme', theme);
+                if (themeIcon) {
+                    themeIcon.className = theme === 'dark' ? 'bi bi-moon-fill' : 'bi bi-sun-fill';
+                }
+                try {
+                    localStorage.setItem('site-theme', theme);
+                } catch (e) {
+                    console.warn('Could not save theme to localStorage.', e);
+                }
+            }
+
+            if (themeToggler) {
+                themeToggler.addEventListener('click', () => {
+                    const currentTheme = htmlEl.getAttribute('data-bs-theme') || 'dark';
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    applyTheme(newTheme);
+                });
+            }
+
+            let storedTheme;
+            try {
+                storedTheme = localStorage.getItem('site-theme');
+            } catch (e) { /* ignore */ }
+            const initialTheme = storedTheme || 'dark';
+            applyTheme(initialTheme);
+        });
+    </script>
+
+    <script>
+        // --- Actualizar fecha en ambos sidebars ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const hoy = new Date();
+            const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+
+            function setDate(idSuffix = '') {
+                const dateDayEl = document.getElementById('date-day' + idSuffix);
+                const dateMonthEl = document.getElementById('date-month' + idSuffix);
+                const dateYearEl = document.getElementById('date-year' + idSuffix);
+
+                if (dateDayEl) dateDayEl.textContent = hoy.getDate();
+                if (dateMonthEl) dateMonthEl.textContent = meses[hoy.getMonth()];
+                if (dateYearEl) dateYearEl.textContent = hoy.getFullYear();
+            }
+            setDate(''); // For desktop
+            setDate('-mobile'); // For offcanvas
+        });
+    </script>
+
+    <script>
+        // --- Navegación por Scroll y Botones ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabTriggers = document.querySelectorAll('.sidebar-tabs a[data-bs-toggle="tab"]');
+
+            let isNavigating = false;
+            let navigationTimeout;
+            let activeCardBody = null;
+
+            const navigateTabs = (direction, resetScroll = true) => {
+                if (isNavigating) return;
+                isNavigating = true;
+
+                const tabs = Array.from(document.querySelectorAll('.tab-pane'));
+                const activeTab = document.querySelector('.tab-pane.active');
+                if (!activeTab) {
+                    isNavigating = false;
+                    return;
+                }
+
+                const currentIndex = tabs.indexOf(activeTab);
+                let nextIndex;
+
+                if (direction === 'down') {
+                    nextIndex = currentIndex + 1;
+                    if (nextIndex >= tabs.length) {
+                        isNavigating = false; // No avanzar más allá del último tab
+                        return;
+                    }
+                } else { // 'up'
+                    nextIndex = currentIndex - 1;
+                    if (nextIndex < 0) {
+                        isNavigating = false; // No retroceder más allá del primer tab
+                        return;
+                    }
+                }
+
+                const nextTabId = tabs[nextIndex].id;
+
+                const triggerEl = document.querySelector(`.sidebar-tabs a[href="#${nextTabId}"]:not(:scope .d-none *)`);
+
+                if (triggerEl) {
+                    const tab = new bootstrap.Tab(triggerEl);
+                    tab.show();
+
+                    if (resetScroll) {
+                        const nextTabPane = document.getElementById(nextTabId);
+                        const nextCardBody = nextTabPane.querySelector('.card-body');
+                        if (nextCardBody) {
+                            nextCardBody.scrollTop = direction === 'down' ? 0 : nextCardBody.scrollHeight;
+                        }
+                    }
+                }
+
+                clearTimeout(navigationTimeout);
+                navigationTimeout = setTimeout(() => {
+                    isNavigating = false;
+                }, 700);
+            };
+
+            // Setup navigation buttons for all controls
+            document.querySelectorAll('#navigateUpBtn, #navigateUpBtnMobile, #fabNavigateUp').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.preventDefault();
+                    navigateTabs('up', true);
+                });
+            });
+            document.querySelectorAll('#navigateDownBtn, #navigateDownBtnMobile, #fabNavigateDown').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.preventDefault();
+                    navigateTabs('down', true);
+                });
+            });
+
+let scrollBoundaryCounter = { up: 0, down: 0 };
+
+const requiredAttempts = 15; // Cambia este número para más o menos intentos
+
+const wheelNavHandler = (event) => {
+    const cardBody = event.currentTarget;
+    const scrollHeight = cardBody.scrollHeight;
+    const clientHeight = cardBody.clientHeight;
+    const scrollTop = cardBody.scrollTop;
+
+    const isScrollable = scrollHeight > clientHeight;
+    const isAtTop = scrollTop === 0;
+    const isAtBottom = (scrollTop + clientHeight) >= scrollHeight - 1;
+
+    if (isScrollable) {
+        if (event.deltaY > 0) { // Scrolling down
+            if (isAtBottom) {
+                scrollBoundaryCounter.down += 1;
+                if (scrollBoundaryCounter.down >= requiredAttempts) {
+                    event.preventDefault();
+                    navigateTabs('down', false);
+                    scrollBoundaryCounter.down = 0;
+                }
+            } else {
+                scrollBoundaryCounter.down = 0; // Reinicia si se aleja del límite
+            }
+            scrollBoundaryCounter.up = 0; // Reinicia el otro sentido
+        } else if (event.deltaY < 0) { // Scrolling up
+            if (isAtTop) {
+                scrollBoundaryCounter.up += 1;
+                if (scrollBoundaryCounter.up >= requiredAttempts) {
+                    event.preventDefault();
+                    navigateTabs('up', false);
+                    scrollBoundaryCounter.up = 0;
+                }
+            } else {
+                scrollBoundaryCounter.up = 0; // Reinicia si se aleja del límite
+            }
+            scrollBoundaryCounter.down = 0; // Reinicia el otro sentido
+        }
+    }
+};
+
+            const setupWheelListenerForActiveTab = () => {
+                if (activeCardBody) {
+                    activeCardBody.removeEventListener('wheel', wheelNavHandler);
+                }
+                const activeTabPane = document.querySelector('.tab-pane.active');
+                if (activeTabPane) {
+                    activeCardBody = activeTabPane.querySelector('.card-body');
+                    if (activeCardBody) {
+                        activeCardBody.addEventListener('wheel', wheelNavHandler);
+                    }
+                }
+            };
+
+            tabTriggers.forEach(tabTriggerEl => {
+                tabTriggerEl.addEventListener('shown.bs.tab', (event) => {
+                    // Sync the other sidebar's active state
+                    const activeTabHref = event.target.getAttribute('href');
+                    const allNavs = document.querySelectorAll('.sidebar-tabs');
+                    const clickedNav = event.target.closest('.sidebar-tabs');
+
+                    allNavs.forEach(nav => {
+                        if (nav !== clickedNav) {
+                            const otherActiveLink = nav.querySelector('.nav-link.active');
+                            if (otherActiveLink) otherActiveLink.classList.remove('active');
+                            const linkToActivate = nav.querySelector(`a[href="${activeTabHref}"]`);
+                            if (linkToActivate) linkToActivate.classList.add('active');
+                        }
+                    });
+
+                    setupWheelListenerForActiveTab();
+                });
+            });
+
+            // Initial setup for the pre-selected active tab
+            setupWheelListenerForActiveTab();
+        });
+    </script>
+
+    <script>
+        // --- Lógica para ocultar/mostrar botones flotantes ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const rightSidebarEl = document.getElementById('right-sidebar-offcanvas');
+            const fabContainerEl = document.getElementById('fab-container');
+
+            if (rightSidebarEl && fabContainerEl) {
+                rightSidebarEl.addEventListener('show.bs.offcanvas', function () {
+                    fabContainerEl.style.display = 'none';
+                });
+
+                rightSidebarEl.addEventListener('hide.bs.offcanvas', function () {
+                    fabContainerEl.style.display = 'block';
+                });
+            }
+        });
+    </script>
+
+    <script>
+        // --- Generación de QR y compartir ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUrl = window.location.href;
+
+            // Función para generar un QR
+            function generateQRCode(elementId, url) {
+                new QRCode(document.getElementById(elementId), {
+                    text: url,
+                    width: 128,
+                    height: 128,
+                });
+            }
+
+            // Genera el QR en el primer contenedor
+            generateQRCode('qr-container-1', currentUrl);
+
+            // Genera el QR en el segundo contenedor
+            generateQRCode('qr-container-2', currentUrl);
+
+            // Lógica para el botón de compartir
+            const shareButton = document.getElementById('share-button');
+
+            if (shareButton) {
+                shareButton.addEventListener('click', () => {
+                    // `navigator.share` es la API para compartir de forma nativa
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Mi Portafolio',
+                            text: '¡Mira mi trabajo en línea!',
+                            url: currentUrl
+                        })
+                            .then(() => console.log('Contenido compartido con éxito.'))
+                            .catch((error) => console.error('Error al compartir:', error));
+                    } else {
+                        // Si el navegador no soporta la API, ofrece una alternativa
+                        navigator.clipboard.writeText(currentUrl)
+                            .then(() => {
+                                alert('Enlace copiado al portapapeles. ¡Pégalo para compartir!');
+                            })
+                            .catch(err => {
+                                console.error('No se pudo copiar el enlace: ', err);
+                            });
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </body>
+
 </html>
