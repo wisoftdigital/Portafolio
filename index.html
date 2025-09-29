@@ -13,8 +13,11 @@
         /* Desactivar scroll global */
         html, body {
             overflow: hidden;
-            height: 100%; /* Asegura que no haya scroll vertical */
+            height: 100%;
         }
+
+    </style>
+    <style>
         /* Minimal CSS - sólo lo necesario */
         :root {
             --app-border: #9aa0a6;
@@ -490,7 +493,7 @@
                                 <div class="card-header bg-transparent border-bottom">
                                     <h4 class="mb-0">Sobre mí</h4>
                                 </div>
-                                <div class="card-body p-4 overflow-auto">
+                                <div class="card-body p-4 overflow-auto" style="height: calc(100vh - 225px);">
 
                                     <p>
                                         Soy un desarrollador y solucionador de problemas tecnológicos con un enfoque
@@ -665,7 +668,7 @@
                                 <div class="card-header bg-transparent border-bottom">
                                     <h4 class="mb-0">App y Automatización</h4>
                                 </div>
-                                <div class="card-body p-4 overflow-auto">
+                                <div class="card-body p-4 overflow-auto" style="height: calc(100vh - 225px);">
 
                                     <div>
                                         <h5 class="fw-bold">Mi Filosofía de Desarrollo</h5>
@@ -839,7 +842,7 @@
                                 <div class="card-header bg-transparent border-bottom">
                                     <h4 class="mb-0">Análisis de Datos y Gemelo Digital</h4>
                                 </div>
-                                <div class="card-body p-4 overflow-auto">
+                                <div class="card-body p-4 overflow-auto" style="height: calc(100vh - 225px);">
 
                                     <p>
                                         Los dashboards nos dicen qué pasó. Me especializo en construir sistemas que
@@ -1051,7 +1054,7 @@
                                 <div class="card-header bg-transparent border-bottom">
                                     <h4 class="mb-0">Proyectos Destacados</h4>
                                 </div>
-                                <div class="card-body p-4 overflow-auto">
+                                <div class="card-body p-4 overflow-auto" style="height: calc(100vh - 225px);">
                                     <p class="mb-4 text-secondary">
                                         Presento algunos proyectos clave desarrollados sobre arquitecturas cloud, donde
                                         aplico análisis estadístico y Business Intelligence para resolver problemas
@@ -1511,10 +1514,3 @@ const wheelNavHandler = (event) => {
 
 
 </html>
-
-
-
-
-
-
-
