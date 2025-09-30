@@ -1307,7 +1307,38 @@
             let navigationTimeout;
             let activeCardBody = null;
 
-            const navigateTabs = (direction, resetScroll = true) => {
+const navigateTabs = (direction, resetScroll = true) => {
+    const tabs = Array.from(document.querySelectorAll('.tab-pane'));
+    const activeTab = document.querySelector('.tab-pane.active');
+    if (!activeTab) return;
+
+    const currentIndex = tabs.indexOf(activeTab);
+    let nextIndex;
+
+    if (direction === 'down') {
+        nextIndex = currentIndex + 1;
+        if (nextIndex >= tabs.length) return; // No avanzar más allá del último tab
+    } else { // 'up'
+        nextIndex = currentIndex - 1;
+        if (nextIndex < 0) return; // No retroceder más allá del primer tab
+    }
+
+    const nextTabId = tabs[nextIndex].id;
+    const triggerEl = document.querySelector(`.sidebar-tabs a[href="#${nextTabId}"]:not(:scope .d-none *)`);
+
+    if (triggerEl) {
+        const tab = new bootstrap.Tab(triggerEl);
+        tab.show();
+
+        if (resetScroll) {
+            const nextTabPane = document.getElementById(nextTabId);
+            const nextCardBody = nextTabPane.querySelector('.card-body');
+            if (nextCardBody) {
+                nextCardBody.scrollTop = direction === 'down' ? 0 : nextCardBody.scrollHeight;
+            }
+        }
+    }
+};
                 if (isNavigating) return;
                 isNavigating = true;
 
