@@ -353,20 +353,21 @@
     </div>
 
     <!-- Botones Flotantes (Solo en móvil) -->
-    <div id="fab-container" class="position-fixed bottom-0 end-0 p-3 d-lg-none" style="z-index: 1055;">
-        <div class="d-flex flex-column gap-2">
-            <button class="btn btn-outline-secondary rounded-3 shadow" style="width: 50px; height: 50px;" type="button"
+    <div id="fab-container" class="position-fixed bottom-0 start-0 p-3 d-lg-none" style="z-index: 1055;">
+        <div class="d-flex flex-column gap-3 align-items-start">
+            <button class="btn btn-outline-secondary rounded-3 shadow d-flex align-items-center justify-content-start" style="width: 180px; height: 60px; font-size: 1.35rem; padding-left: 1.2rem;" type="button"
                 data-bs-toggle="offcanvas" data-bs-target="#right-sidebar-offcanvas"
                 aria-controls="right-sidebar-offcanvas">
-                <i class="bi bi-layout-sidebar-inset-reverse"></i>
+                <i class="bi bi-layout-sidebar-inset-reverse me-2" style="font-size: 1.5rem;"></i>
+                <span style="font-weight: 600;">Menú</span>
             </button>
-            <button id="fabNavigateUp" class="btn btn-outline-secondary rounded-3 shadow"
-                style="width: 50px; height: 50px;">
-                <i class="bi bi-chevron-up"></i>
+            <button id="fabNavigateDown" class="btn btn-success rounded-3 shadow d-flex align-items-center justify-content-start" style="width: 180px; height: 60px; font-size: 1.35rem; padding-left: 1.2rem;">
+                <i class="bi bi-chevron-down me-2" style="font-size: 1.5rem;"></i>
+                <span style="font-weight: 600;">Siguiente</span>
             </button>
-            <button id="fabNavigateDown" class="btn btn-outline-secondary rounded-3 shadow"
-                style="width: 50px; height: 50px;">
-                <i class="bi bi-chevron-down"></i>
+            <button id="fabNavigateUp" class="btn btn-outline-secondary rounded-3 shadow d-flex align-items-center justify-content-start" style="width: 180px; height: 60px; font-size: 1.35rem; padding-left: 1.2rem;">
+                <i class="bi bi-chevron-up me-2" style="font-size: 1.5rem;"></i>
+                <span style="font-weight: 600;">Anterior</span>
             </button>
         </div>
     </div>
