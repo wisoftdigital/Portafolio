@@ -1339,55 +1339,6 @@ const navigateTabs = (direction, resetScroll = true) => {
         }
     }
 };
-                if (isNavigating) return;
-                isNavigating = true;
-
-                const tabs = Array.from(document.querySelectorAll('.tab-pane'));
-                const activeTab = document.querySelector('.tab-pane.active');
-                if (!activeTab) {
-                    isNavigating = false;
-                    return;
-                }
-
-                const currentIndex = tabs.indexOf(activeTab);
-                let nextIndex;
-
-                if (direction === 'down') {
-                    nextIndex = currentIndex + 1;
-                    if (nextIndex >= tabs.length) {
-                        isNavigating = false; // No avanzar más allá del último tab
-                        return;
-                    }
-                } else { // 'up'
-                    nextIndex = currentIndex - 1;
-                    if (nextIndex < 0) {
-                        isNavigating = false; // No retroceder más allá del primer tab
-                        return;
-                    }
-                }
-
-                const nextTabId = tabs[nextIndex].id;
-
-                const triggerEl = document.querySelector(`.sidebar-tabs a[href="#${nextTabId}"]:not(:scope .d-none *)`);
-
-                if (triggerEl) {
-                    const tab = new bootstrap.Tab(triggerEl);
-                    tab.show();
-
-                    if (resetScroll) {
-                        const nextTabPane = document.getElementById(nextTabId);
-                        const nextCardBody = nextTabPane.querySelector('.card-body');
-                        if (nextCardBody) {
-                            nextCardBody.scrollTop = direction === 'down' ? 0 : nextCardBody.scrollHeight;
-                        }
-                    }
-                }
-
-                clearTimeout(navigationTimeout);
-                navigationTimeout = setTimeout(() => {
-                    isNavigating = false;
-                }, 700);
-            };
 
             // Setup navigation buttons for all controls
             document.querySelectorAll('#navigateUpBtn, #navigateUpBtnMobile, #fabNavigateUp').forEach(btn => {
